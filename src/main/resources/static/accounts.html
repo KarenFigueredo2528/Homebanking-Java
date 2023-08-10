@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="shortcut icon" href="web/assets/images/favicon-bank.png" type="image/x-icon">
+    <link rel="stylesheet" href="web/assets/style/accounts.css">
+    <title>Accounts | Brothers MindHub Bank</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+                <div class="container-fluid">
+                    <!--Logo-->
+                    <a class="navbar-brand fs-4 fw-bold" href="#">BROTHERS MINDHUB</a>
+                    <!--Toggle btns-->
+                    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!--Sidebar-->
+                    <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <!--Sidebar Header-->
+                        <div class="offcanvas-header text-white border-bottom">
+                            <h5 class="offcanvas-title" id="offcanvasNabarLabel">Brothers MindHub</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                            <!--Sidebar body-->
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end gap-4 flex-grow-1 pe-3">
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link active" aria-current="page" href="#">Accounts</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" href="#">Cards</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" href="#">Loans</a>
+                                </li>
+                                <li class="nav-item mx-2">
+                                    <a class="nav-link" href="#">Transactions</a>
+                                </li>
+                                <button class="Btn mx-2">
+
+                                    <div class="sign">
+                                        <svg viewBox="0 0 512 512">
+                                            <path
+                                                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                            </path>
+                                        </svg>
+                                    </div>
+
+                                    <div class="text">Logout</div>
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="d-flex justify-content-center align-items-center flex-column gap-3 pb-5">
+            <!--Welcome-->
+            <section class=" container-fluid d-flex justify-content-between px-4 text-white align-items-center"
+                id="section-welcome">
+                <img src="web/assets/images/icon-bank.png" alt="logo" title="Logo Brothers Mindhub" class="logo">
+                <h2>Welcome {{clients.firstName}} {{clients.lastName}}</h2>
+            </section>
+
+            <!--Profile-->
+
+
+            <div class="card-client">
+                <div class="user-picture">
+                    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z">
+                        </path>
+                    </svg>
+                </div>
+                <p class="name-client"> {{clients.firstName}}
+                    <span>{{clients.email}}
+                    </span>
+
+                </p>
+            </div>
+
+            <!--Cards-->
+            <div class="container mt-5 d-flex flex-wrap gap-2 justify-content-around">
+                <template v-if="accounts.length > 0" v-for="account of accounts">
+                    <div class="card">
+                        <div class="foreground">
+                            <div class="credit-card-header">
+                                <div class="bank">Brothers MindHub</div>
+                            </div>
+                            <div class="credit-card-chip-container">
+                                <svg xml:space="preserve" viewBox="0 0 511 511"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                                    id="Capa_1" version="1.1" width="800px" height="800px" fill="#d4af37" class="chip">
+                                    <path d="M455.5,56h-400C24.897,56,0,80.897,0,111.5v288C0,430.103,24.897,455,55.5,455h400c30.603,0,55.5-24.897,55.5-55.5v-288
+              C511,80.897,486.103,56,455.5,56z M464,248H343v-56.5c0-4.687,3.813-8.5,8.5-8.5H464V248z M343,263h121v65H343V263z M479,223h17v65
+              h-17V223z M479,208v-65h17v65H479z M464,168H351.5c-12.958,0-23.5,10.542-23.5,23.5V408H183V103h272.5c4.687,0,8.5,3.813,8.5,8.5
+              V168z M168,248H47v-65h121V248z M32,288H15v-65h17V288z M47,263h121v65H47V263z M263,88V71h137v17H263z M248,88H111V71h137V88z
+               M168,103v65H47v-56.5c0-4.687,3.813-8.5,8.5-8.5H168z M32,208H15v-65h17V208z M15,303h17v65H15V303z M47,343h121v65H55.5
+              c-4.687,0-8.5-3.813-8.5-8.5V343z M248,423v17H111v-17H248z M263,423h137v17H263V423z M343,408v-65h121v56.5
+              c0,4.687-3.813,8.5-8.5,8.5H343z M479,303h17v65h-17V303z M496,111.5V128h-17v-16.5c0-12.958-10.542-23.5-23.5-23.5H415V71h40.5
+              C477.832,71,496,89.168,496,111.5z M55.5,71H96v17H55.5C42.542,88,32,98.542,32,111.5V128H15v-16.5C15,89.168,33.168,71,55.5,71z
+               M15,399.5V383h17v16.5c0,12.958,10.542,23.5,23.5,23.5H96v17H55.5C33.168,440,15,421.832,15,399.5z M455.5,440H415v-17h40.5
+              c12.958,0,23.5-10.542,23.5-23.5V383h17v16.5C496,421.832,477.832,440,455.5,440z"></path>
+                                </svg>
+                            </div>
+
+                            <div class="tarjeta text-light">
+                                <p>Account Number: {{account.number}}</p>
+                                <p>Balance: </p>
+                                <h4>{{account.balance}}</h4>
+                                <p class="d-flex flex-column">Create date: {{account.creationDate}} <span><a
+                                            :href="'./account.html?id='+account.id"
+                                            class="btn text-center mt-2 ">Transaction History</a></span>
+                                </p>
+                            </div>
+
+                        </div>
+                        <svg viewBox="0 0 1600 800" height="100%" width="100%" class="background">
+                            <rect height="800" width="1600" fill="#ff9d00"></rect>
+                            <g transform="rotate(-30 500 100)" stroke-opacity="0.05" stroke-width="66.7" stroke="#000">
+                                <circle r="1800" cy="0" cx="0" fill="#ff9d00"></circle>
+                                <circle r="1700" cy="0" cx="0" fill="#fb8d17"></circle>
+                                <circle r="1600" cy="0" cx="0" fill="#f47d24"></circle>
+                                <circle r="1500" cy="0" cx="0" fill="#ed6e2d"></circle>
+                                <circle r="1400" cy="0" cx="0" fill="#e35f34"></circle>
+                                <circle r="1300" cy="0" cx="0" fill="#d85239"></circle>
+                                <circle r="1200" cy="0" cx="0" fill="#cc453e"></circle>
+                                <circle r="1100" cy="0" cx="0" fill="#be3941"></circle>
+                                <circle r="1000" cy="0" cx="0" fill="#b02f43"></circle>
+                                <circle r="900" cy="0" cx="0" fill="#a02644"></circle>
+                                <circle r="800" cy="0" cx="0" fill="#901e44"></circle>
+                                <circle r="700" cy="0" cx="0" fill="#801843"></circle>
+                                <circle r="600" cy="0" cx="0" fill="#6f1341"></circle>
+                                <circle r="500" cy="0" cx="0" fill="#5e0f3d"></circle>
+                                <circle r="400" cy="0" cx="0" fill="#4e0c38"></circle>
+                                <circle r="300" cy="0" cx="0" fill="#3e0933"></circle>
+                                <circle r="200" cy="0" cx="0" fill="#2e062c"></circle>
+                                <circle r="100" cy="0" cx="0" fill="#210024"></circle>
+                            </g>
+                        </svg>
+                </template>
+            </div>
+    </div>
+
+    </main>
+
+    <footer class="d-flex  align-items-center justify-content-around">
+
+        <img src="web/assets/images/icon-bank.png" alt="logo" title="logo" class="logo">
+        <p class="text-white">Brothers Mindhub</p>
+
+        <div class="flex-wrap d-flex">
+            <a target="_blank" href="https://es-la.facebook.com/"><img src="web/assets/images/facebook (2).png"
+                    alt="facebook" title="Facebook" class="network-icon"></a>
+            <a target="_blank" href="https://web.whatsapp.com/"><img src="web/assets/images/whatsapp (2).png"
+                    alt="whatsapp" title="Whatsapp" class="network-icon"></a>
+            <a href="tel: +57123456789"><img src="web/assets/images/phone.png" alt="call-center" title="Call center"
+                    class="network-icon"></a>
+        </div>
+    </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="web/assets/scripts/accounts.js"></script>
+</body>
+
+</html>

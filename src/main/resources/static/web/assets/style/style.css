@@ -1,0 +1,19 @@
+header{
+    height: 50vh;
+    background: url("../images/img-trade-1.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+body{
+    background-color:teal;
+}
+
+footer{
+    height: 10rem;
+    background-color: #141414;
+  }
+
+  .network-icon{
+    width: 2.5rem;
+  }
