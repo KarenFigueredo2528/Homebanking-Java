@@ -1,9 +1,7 @@
 package com.mindhub.homebankingUno.controllers;
 
 import com.mindhub.homebankingUno.dtos.AccountDTO;
-import com.mindhub.homebankingUno.dtos.ClientDTO;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
-import com.mindhub.homebankingUno.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

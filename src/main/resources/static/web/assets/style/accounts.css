@@ -21,6 +21,9 @@ main{
     }
 }
 
+[v-cloak]{
+  display: none !important;
+}
 
 /*Logout*/
 .Btn {

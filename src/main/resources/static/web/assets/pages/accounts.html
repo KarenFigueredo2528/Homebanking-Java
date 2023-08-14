@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="shortcut icon" href="web/assets/images/favicon-bank.png" type="image/x-icon">
-    <link rel="stylesheet" href="web/assets/style/accounts.css">
+    <link rel="shortcut icon" href="../images/favicon-bank.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style/accounts.css">
     <title>Accounts | Brothers MindHub Bank</title>
 </head>
 
 <body>
 
-    <div id="app">
+    <div id="app" v-cloak>
         <header>
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
                 <div class="container-fluid">
                     <!--Logo-->
-                    <a class="navbar-brand fs-4 fw-bold" href="#">BROTHERS MINDHUB</a>
+                    <a class="navbar-brand fs-4 fw-bold" href="#"> MINDHUB BROTHERS</a>
                     <!--Toggle btns-->
                     <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
@@ -31,7 +31,7 @@
                         aria-labelledby="offcanvasNavbarLabel">
                         <!--Sidebar Header-->
                         <div class="offcanvas-header text-white border-bottom">
-                            <h5 class="offcanvas-title" id="offcanvasNabarLabel">Brothers MindHub</h5>
+                            <h5 class="offcanvas-title" id="offcanvasNabarLabel"> MindHub Brothers</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                             <!--Sidebar body-->
@@ -74,7 +74,7 @@
             <!--Welcome-->
             <section class=" container-fluid d-flex justify-content-between px-4 text-white align-items-center"
                 id="section-welcome">
-                <img src="web/assets/images/icon-bank.png" alt="logo" title="Logo Brothers Mindhub" class="logo">
+                <img src="../images/icon-bank.png" alt="logo" title="Logo Brothers Mindhub" class="logo">
                 <h2>Welcome {{clients.firstName}} {{clients.lastName}}</h2>
             </section>
 
@@ -157,21 +157,52 @@
                         </svg>
                 </template>
             </div>
+
+
+            <div class="mt-4 container text-light">
+
+                <table class="table table-bordered table-striped border border-danger">
+                    <h2>Loans Resume: </h2>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <template v-if="loans.length >0 " v-for="loan of loans">
+                            <tr>
+                                <td> {{loan.name}} </td>
+                                <td> {{loan.amount}} </td>
+                                <td> {{loan.payments}} </td>
+                            </tr>
+                        </template>
+                        <tr v-else>
+                            <td>0</td>
+                            <td>No show Data</td>
+                            <td>No show Data</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </main>
+
     </div>
-
-    </main>
-
     <footer class="d-flex  align-items-center justify-content-around">
 
-        <img src="web/assets/images/icon-bank.png" alt="logo" title="logo" class="logo">
+        <img src="../images/icon-bank.png" alt="logo" title="logo" class="logo">
         <p class="text-white">Brothers Mindhub</p>
 
         <div class="flex-wrap d-flex">
-            <a target="_blank" href="https://es-la.facebook.com/"><img src="web/assets/images/facebook (2).png"
-                    alt="facebook" title="Facebook" class="network-icon"></a>
-            <a target="_blank" href="https://web.whatsapp.com/"><img src="web/assets/images/whatsapp (2).png"
-                    alt="whatsapp" title="Whatsapp" class="network-icon"></a>
-            <a href="tel: +57123456789"><img src="web/assets/images/phone.png" alt="call-center" title="Call center"
+            <a target="_blank" href="https://es-la.facebook.com/"><img src="../images/facebook%20(2).png" alt="facebook"
+                    title="Facebook" class="network-icon"></a>
+            <a target="_blank" href="https://web.whatsapp.com/"><img src="../images/whatsapp%20(2).png" alt="whatsapp"
+                    title="Whatsapp" class="network-icon"></a>
+            <a href="tel: +57123456789"><img src="../images/phone.png" alt="call-center" title="Call center"
                     class="network-icon"></a>
         </div>
     </footer>
@@ -183,7 +214,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="web/assets/scripts/accounts.js"></script>
+    <script src="../scripts/accounts.js"></script>
 </body>
 
 </html>

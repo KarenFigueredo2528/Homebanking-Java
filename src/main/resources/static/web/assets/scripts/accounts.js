@@ -4,7 +4,8 @@ const options ={
     data(){
         return{
             clients: [],
-            accounts:[]
+            accounts:[],
+            loans:[]
         }
     },
     created(){
@@ -12,10 +13,11 @@ const options ={
     },
     methods:{
         loadData(){
-            axios.get("http://localhost:8080/api/clients")
+            axios.get("http://localhost:8080/api/clients/1")
             .then(answer => {
-                this.clients = answer.data[0];
-                console.log(this.clients);
+                this.clients = answer.data;
+                this.loans = this.clients.loans;
+                console.log(this.loans);
                 for (const account of this.clients.accounts) {
                     const aux = {
                         id: account.id,
