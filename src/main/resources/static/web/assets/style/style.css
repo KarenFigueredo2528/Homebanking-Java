@@ -1,19 +1,43 @@
+nav {
+  background-color: #14274f;
+}
+
+.logo {
+  height: 5rem;
+}
+
+/*Log out #14274f*/
+.animated-button{
+    background-color: cadetblue;
+    border-radius: 15px;
+    width: 10rem;
+    height: 2rem;
+}
+
+.animated-button:hover{
+    background-color: rgb(182, 18, 18);
+    color: white;
+}
+
+/*Header*/
 header{
-    height: 50vh;
-    background: url("../images/img-trade-1.jpg");
+    background: url("../images/manager_header.jpg");
+    min-height: 50vh;
     background-size: cover;
-    background-position: center;
+}
+
+#section-header, .btn, footer{
+    background-color: #14274f;
 }
 
 body{
-    background-color:teal;
+    background-color: #ccdbfd;
 }
 
-footer{
-    height: 10rem;
-    background-color: #141414;
-  }
+footer a{
+ text-decoration: none;
+}
 
-  .network-icon{
+.network-icon{
     width: 2.5rem;
-  }
+}

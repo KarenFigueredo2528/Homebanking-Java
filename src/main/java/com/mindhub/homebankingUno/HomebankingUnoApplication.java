@@ -28,6 +28,8 @@ public class HomebankingUnoApplication {
         return (args) -> {
             // save a couple of clients
             Client client = new Client("Melba", "Morel", "melba@mindhub.com");
+            client.setFirstName("Guille");
+            System.out.println(client);
             Account account1 = new Account("VIN001", this.currentDate, 5000);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
             Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT );
