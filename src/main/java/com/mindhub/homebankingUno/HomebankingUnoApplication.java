@@ -16,54 +16,73 @@ public class HomebankingUnoApplication {
     private ClientRepository clientRepository;
     private LocalDate currentDate = LocalDate.now();
     private LocalDate tomorrowDate = LocalDate.now().plusDays(1);
+    private LocalDate fiveYears = LocalDate.now().plusYears(5);
     private LocalDateTime dataTransfer = LocalDateTime.now().withNano(0);
 
     public static void main(String[] args) {
         SpringApplication.run(HomebankingUnoApplication.class, args);
     }
+
     @Bean
     public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
                                       TransationRepository transationRepository, LoanRepository loanRepository,
-                                      ClientLoanRepository clientLoanRepository) {
+                                      ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
         return (args) -> {
             // save a couple of clients
             Client client = new Client("Melba", "Morel", "melba@mindhub.com");
-            client.setFirstName("Guille");
-            System.out.println(client);
+            Client client2 = new Client("Santiago", "Perez", "santiago@gmail.com");
             Account account1 = new Account("VIN001", this.currentDate, 5000);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
-            Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT );
+            Account account3 = new Account("VIN003", this.currentDate, 5600);
+            Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT);
             Transaction transfer2 = new Transaction(-500, "Keyboard", this.dataTransfer, TransactionType.DEBIT);
             Transaction transfer3 = new Transaction(-3000, "Concert and parties", this.dataTransfer, TransactionType.CREDIT);
-            Loan mortgage = new Loan("Mortgage", 500000,Arrays.asList(12,24,36,48,60));
-            Loan personal = new Loan("Personal", 100000,Arrays.asList(6,12,24));
-            Loan automotive = new Loan("Automotive", 300000,Arrays.asList(6,12,24,36));
+            Transaction transfer4 = new Transaction(1000, "rent", this.dataTransfer, TransactionType.DEBIT);
+            Transaction transfer5 = new Transaction(-200, "Pet food", this.dataTransfer, TransactionType.CREDIT);
+            Loan mortgage = new Loan("Mortgage", 500000, Arrays.asList(12, 24, 36, 48, 60));
+            Loan personal = new Loan("Personal", 100000, Arrays.asList(6, 12, 24));
+            Loan automotive = new Loan("Automotive", 300000, Arrays.asList(6, 12, 24, 36));
             ClientLoan mortgage1 = new ClientLoan(400000, 60);
             ClientLoan personal1 = new ClientLoan(50000, 12);
+            Card goldCard = new Card("Melba Morel", "123-456-789-012", 564, this.currentDate, this.fiveYears);
+            Card titaniumCard = new Card("Melba Morel","987654321456",978, this.currentDate,this.fiveYears);
+            Card silver = new Card("Santiago", "Perez", 754, this.currentDate, this.fiveYears);
+
 
             client.addAccounts(account1);
             client.addAccounts(account2);
+            client2.addAccounts(account3);
             account1.addTransfer(transfer1);
             account1.addTransfer(transfer2);
             account2.addTransfer(transfer3);
+            account3.addTransfer(transfer4);
+            account3.addTransfer(transfer5);
             client.addLoan(mortgage1);
             client.addLoan(personal1);
             mortgage.addClientLoan(mortgage1);
             personal.addClientLoan(personal1);
+            client.addCards(goldCard);
+            client.addCards(titaniumCard);
+            client2.addCards(silver);
 
             clientRepository.save(client);
+            clientRepository.save(client2);
             accountRepository.save(account1);
             accountRepository.save(account2);
+            accountRepository.save(account3);
             transationRepository.save(transfer1);
             transationRepository.save(transfer2);
             transationRepository.save(transfer3);
+            transationRepository.save(transfer4);
+            transationRepository.save(transfer5);
             loanRepository.save(mortgage);
             loanRepository.save(personal);
             loanRepository.save(automotive);
             clientLoanRepository.save(mortgage1);
             clientLoanRepository.save(personal1);
-
-
+            cardRepository.save(goldCard);
+            cardRepository.save(titaniumCard);
+            cardRepository.save(silver);
 
         };
     }

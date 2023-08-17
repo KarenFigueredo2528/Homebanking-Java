@@ -2,11 +2,9 @@ package com.mindhub.homebankingUno.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+
 
 @Entity
 public class Card {
@@ -22,8 +20,12 @@ public class Card {
     private LocalDate thruDate;
     private LocalDate fromDate;
 
-    //Constructor methods
+    //Relation
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
+    private Client client;
 
+    //Constructor methods
     public Card() {
     }
 
@@ -34,6 +36,7 @@ public class Card {
         this.thruDate = thruDate;
         this.fromDate = fromDate;
     }
+
 
     //Getters and setters
 
@@ -83,5 +86,8 @@ public class Card {
 
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
+    }
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

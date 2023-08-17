@@ -15,6 +15,7 @@ public class ClientDTO {
     private String email;
     private Set<AccountDTO> accounts;
     private Set<ClientLoadDTO> loans;
+    private Set<CardDTO> cards;
 
     //Constructor Methods
     public ClientDTO() {
@@ -32,6 +33,10 @@ public class ClientDTO {
        this.loans = client.getClientLoans().stream()
                .map(clientLoan -> new ClientLoadDTO(clientLoan))
                .collect(Collectors.toSet());
+
+        this.cards = client.getCards().stream()
+                .map(card -> new CardDTO(card))
+                .collect(Collectors.toSet());
     }
 
     //Accessor methods (getters and setters)
