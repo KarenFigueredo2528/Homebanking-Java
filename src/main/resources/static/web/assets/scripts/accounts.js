@@ -1,34 +1,25 @@
-const {createApp} = Vue;
+const { createApp } = Vue;
 
-const options ={
-    data(){
-        return{
+const options = {
+    data() {
+        return {
             clients: [],
-            accounts:[],
-            loans:[]
+            accounts: [],
+            loans: []
         }
     },
-    created(){
+    created() {
         this.loadData();
     },
-    methods:{
-        loadData(){
+    methods: {
+        loadData() {
             axios.get("http://localhost:8080/api/clients/1")
-            .then(answer => {
-                this.clients = answer.data;
-                this.loans = this.clients.loans;
-                console.log(this.loans);
-                for (const account of this.clients.accounts) {
-                    const aux = {
-                        id: account.id,
-                        number: account.number,
-                        creationDate: account.creationDate,
-                        balance: account.balance
-                    }
-                    this.accounts.push(aux)
-                }
-                console.log(this.accounts);
-            }).catch((error) => console.log(error));
+                .then(answer => {
+                    this.clients = answer.data;
+                    this.loans = this.clients.loans;
+                    this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id);
+                    console.log(this.loans);
+                }).catch((error) => console.log(error));
 
         }
     }

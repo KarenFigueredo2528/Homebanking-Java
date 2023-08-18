@@ -16,6 +16,8 @@ public class Card {
     //Properties
     private String cardHolder;
     private String number;
+    private CardColor color;
+    private CardType type;
     private int cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
@@ -29,8 +31,10 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardHolder, String number, int cvv, LocalDate thruDate, LocalDate fromDate) {
+    public Card(String cardHolder, CardType cardType, CardColor cardColor,String number, int cvv, LocalDate thruDate, LocalDate fromDate) {
         this.cardHolder = cardHolder;
+        this.type = cardType;
+        this.color= cardColor;
         this.number = number;
         this.cvv = cvv;
         this.thruDate = thruDate;
@@ -89,5 +93,25 @@ public class Card {
     }
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public CardColor getColor() {
+        return color;
+    }
+
+    public void setColor(CardColor color) {
+        this.color = color;
+    }
+
+    public CardType getType() {
+        return type;
+    }
+
+    public void setType(CardType type) {
+        this.type = type;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }

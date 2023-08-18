@@ -44,9 +44,9 @@ public class HomebankingUnoApplication {
             Loan automotive = new Loan("Automotive", 300000, Arrays.asList(6, 12, 24, 36));
             ClientLoan mortgage1 = new ClientLoan(400000, 60);
             ClientLoan personal1 = new ClientLoan(50000, 12);
-            Card goldCard = new Card("Melba Morel", "123-456-789-012", 564, this.currentDate, this.fiveYears);
-            Card titaniumCard = new Card("Melba Morel","987654321456",978, this.currentDate,this.fiveYears);
-            Card silver = new Card("Santiago", "Perez", 754, this.currentDate, this.fiveYears);
+            Card goldCard = new Card("Melba Morel",CardType.DEBIT,CardColor.GOLD,"123-456-789-012", 564, this.currentDate, this.fiveYears);
+            Card titaniumCard = new Card("Melba Morel",CardType.CREDIT,CardColor.TITANIUM,"987-654-321-456",978, this.currentDate,this.fiveYears);
+            Card silver = new Card("Santiago Peréz",CardType.CREDIT, CardColor.SILVER,"456987123789", 754, this.currentDate, this.fiveYears);
 
 
             client.addAccounts(account1);

@@ -18,6 +18,7 @@ const options ={
             axios.get(`http://localhost:8080/api/accounts/${idSearch}`)
             .then(answer =>{
                 this.account = answer.data
+                console.log(this.account);
                 this.transaction = this.account.transactions.sort((a,b)=> b.id - a.id)
                 console.log(this.transaction);
             }).catch(error=>console.log("error"));
