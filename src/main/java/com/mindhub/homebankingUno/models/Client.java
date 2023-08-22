@@ -2,6 +2,7 @@ package com.mindhub.homebankingUno.models;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import javax.swing.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Client {
     private String firstName;
     private String lastName;
     private String email;
-
+    private String password;
 
     //Relations
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
@@ -35,10 +36,11 @@ public class Client {
     public Client(){
     }
 
-    public Client(String firstName, String lastName, String email) {
+    public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     //Accessor methods (getters and setters)
@@ -47,13 +49,6 @@ public class Client {
     }
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<Account> getAccounts() {
-        return accounts;
-    }
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
     }
 
     public String getFirstName() {
@@ -77,6 +72,20 @@ public class Client {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     public Set<Account> getAccount() {
         return accounts;
     }
@@ -89,6 +98,13 @@ public class Client {
     }
     public void setClientLoans(Set<ClientLoan> clientLoans) {
         this.clientLoans = clientLoans;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
     }
 
     public List<String> getLoans() {
@@ -107,16 +123,9 @@ public class Client {
         this.accounts.add(account1);
     }
 
-    public Set<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(Set<Card> cards) {
-        this.cards = cards;
-    }
-
     public void addCards(Card card){
         card.setClient(this);
         this.cards.add(card);
     }
+
 }

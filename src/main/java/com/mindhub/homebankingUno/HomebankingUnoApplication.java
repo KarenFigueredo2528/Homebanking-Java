@@ -25,12 +25,12 @@ public class HomebankingUnoApplication {
 
     @Bean
     public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
-                                      TransationRepository transationRepository, LoanRepository loanRepository,
+                                      TransactionRepository transactionRepository, LoanRepository loanRepository,
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
         return (args) -> {
             // save a couple of clients
-            Client client = new Client("Melba", "Morel", "melba@mindhub.com");
-            Client client2 = new Client("Santiago", "Perez", "santiago@gmail.com");
+            Client client = new Client("Melba", "Morel", "melba@mindhub.com","A1B2C3D4");
+            Client client2 = new Client("Santiago", "Perez", "santiago@gmail.com","E5F6G7H8");
             Account account1 = new Account("VIN001", this.currentDate, 5000);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
             Account account3 = new Account("VIN003", this.currentDate, 5600);
@@ -70,11 +70,11 @@ public class HomebankingUnoApplication {
             accountRepository.save(account1);
             accountRepository.save(account2);
             accountRepository.save(account3);
-            transationRepository.save(transfer1);
-            transationRepository.save(transfer2);
-            transationRepository.save(transfer3);
-            transationRepository.save(transfer4);
-            transationRepository.save(transfer5);
+            transactionRepository.save(transfer1);
+            transactionRepository.save(transfer2);
+            transactionRepository.save(transfer3);
+            transactionRepository.save(transfer4);
+            transactionRepository.save(transfer5);
             loanRepository.save(mortgage);
             loanRepository.save(personal);
             loanRepository.save(automotive);
