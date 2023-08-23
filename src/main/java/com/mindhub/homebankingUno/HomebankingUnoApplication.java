@@ -2,10 +2,12 @@ package com.mindhub.homebankingUno;
 
 import com.mindhub.homebankingUno.models.*;
 import com.mindhub.homebankingUno.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +21,9 @@ public class HomebankingUnoApplication {
     private LocalDate fiveYears = LocalDate.now().plusYears(5);
     private LocalDateTime dataTransfer = LocalDateTime.now().withNano(0);
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public static void main(String[] args) {
         SpringApplication.run(HomebankingUnoApplication.class, args);
     }
@@ -29,7 +34,7 @@ public class HomebankingUnoApplication {
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
         return (args) -> {
             // save a couple of clients
-            Client client = new Client("Melba", "Morel", "melba@mindhub.com","A1B2C3D4");
+            Client client = new Client("Melba", "Morel", "melba@mindhub.com",passwordEncoder.encode("A1B2C3D4"));
             Client client2 = new Client("Santiago", "Perez", "santiago@gmail.com","E5F6G7H8");
             Account account1 = new Account("VIN001", this.currentDate, 5000);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
