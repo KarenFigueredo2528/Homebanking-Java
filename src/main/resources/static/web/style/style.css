@@ -1,0 +1,20 @@
+body{
+    background-image: url("../background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/*Form style*/
+form{
+    background-color: #d8e2dc;
+}
+
+.btn{
+    background-color: #4f0769;
+}
+
+.btn:hover{
+    background-color: #505699;  
+}

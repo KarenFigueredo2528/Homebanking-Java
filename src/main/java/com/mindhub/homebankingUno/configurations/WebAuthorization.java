@@ -1,6 +1,7 @@
 package com.mindhub.homebankingUno.configurations;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,16 +15,16 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/**").hasAuthority("USER");
-
-        /*Dar permido a endpoints, js, css y html*/
+                .antMatchers("/web/index.html").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/login","/api/clients", "/api/logout").permitAll()
+                .antMatchers("/web/admiPages/**").hasAuthority("ADMIN")
+                .antMatchers("/web/assets/**").hasAuthority("CLIENT");
 
 
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .loginPage("/api/login"); /*No sería /index en vez de /login ? */
+                .loginPage("/api/login");
 
 
         http.logout().logoutUrl("/api/logout");
