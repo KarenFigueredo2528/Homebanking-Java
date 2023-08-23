@@ -34,8 +34,8 @@ public class HomebankingUnoApplication {
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
         return (args) -> {
             // save a couple of clients
-            Client client = new Client("Melba", "Morel", "melba@mindhub.com",passwordEncoder.encode("A1B2C3D4"));
-            Client client2 = new Client("admin", "admin", "admin@admin.com",passwordEncoder.encode("E5F6G7H8"));
+            Client client = new Client("Melba", "Morel", "melba@mindhub.com",passwordEncoder.encode("123456"));
+            Client client2 = new Client("admin", "admin", "admin@admin.com",passwordEncoder.encode("456789"));
             Account account1 = new Account("VIN001", this.currentDate, 5000);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
             Account account3 = new Account("VIN003", this.currentDate, 5600);

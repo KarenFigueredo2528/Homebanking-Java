@@ -17,7 +17,7 @@ const options = {
             "http://localhost:8080/web/assets/pages/accounts.html";
         })
         .catch((error) => {
-            window.alert("The entered data is not registered, try again or create an account with us")
+            window.alert("Ups! Something is wrong with de data, try again")
         });
     },
     register() {},
