@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @EnableWebSecurity
 @Configuration
 public class WebAuthorization {
@@ -22,21 +21,16 @@ public class WebAuthorization {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/web/index.html").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
-                .antMatchers("/web/admiPages/**", "/api/clients").hasAuthority("ADMIN")
-                .antMatchers("/web/assets/**").hasAuthority("CLIENT")
-                .antMatchers("/web/register.html", "/web/index.js",
-                        "/web/style/style.css", "/web/images").permitAll()
-                .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN");
-
+              .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
+              .antMatchers("/web/index.html","/web/register.html", "/web/index.js", "/web/style/**", "/web/images").permitAll()
+              .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN")
+              .antMatchers("/web/admiPages/**", "/web/style/style.css","/api/clients").hasAuthority("ADMIN")
+              .antMatchers(HttpMethod.GET, "/api/clients/current/**","/api/accounts").hasAuthority("CLIENT");
 
         http.formLogin()
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .loginPage("/api/login");
-
-
+              .usernameParameter("email")
+              .passwordParameter("password")
+              .loginPage("/api/login");
         http.logout().logoutUrl("/api/logout");
 
         http.csrf().disable();

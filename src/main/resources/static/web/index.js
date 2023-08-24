@@ -5,6 +5,8 @@ const options = {
     return {
       email: "",
       password: "",
+      firstName:"",
+      lastName:""
     };
   },
   created() {},
@@ -13,14 +15,34 @@ const options = {
       axios
         .post("/api/login", `email=${this.email}&password=${this.password}`)
         .then((answer) => {
-          window.location.href =
-            "http://localhost:8080/web/assets/pages/accounts.html";
+          if (this.email == "admin@admin.com") {
+            location.href = "./admiPages/manager.html";
+          } else {
+            window.location.href =
+              "./assets/pages/accounts.html";
+          }
         })
         .catch((error) => {
-            window.alert("Ups! Something is wrong with de data, try again")
+          window.alert("Ups! Something is wrong with de data, try again");
         });
     },
-    register() {},
+    register(event) {
+      event.preventDefault();
+      console.log("no te calentes martin");
+      axios
+      .post("/api/clients",`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,{headers:{'content-type': 'application/x-www-form-urlencoded'}})
+        .then((response) =>{
+            this.login()
+        }) 
+        .catch((error) => 
+        Swal.fire({
+          title: 'Error!',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
+      );
+    },
   },
 };
 

@@ -12,19 +12,20 @@
     <link rel="stylesheet" href="./style/style.css" />
     <link
       rel="shortcut icon"
-      href="Mindhub%20Brothers-logos.jpeg"
+      href="./images/Mindhub Brothers-logos.jpeg"
       type="image/x-icon"
     />
-    <title>Main app</title>
+    <title>Sign in | Mindhub Brothers</title>
   </head>
   <body>
     <div id="app">
-      <main class="container col-lg-5">
+      <main class="container col-lg-5 mt-5">
         <form class="rounded-4 px-5 py-4">
           <h3 class="text-center">Have an account?</h3>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input
+              required=""
               type="email"
               class="form-control"
               id="email"
@@ -34,10 +35,9 @@
             />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label"
-              >Password</label
-            >
+            <label for="password" class="form-label">Password</label>
             <input
+              required=""
               type="password"
               class="form-control"
               id="password"
@@ -45,7 +45,9 @@
               v-model="password"
             />
           </div>
-          <button type="button" class="btn text-white" @click="login">Sign in</button>
+          <button type="button" class="btn text-white" @click="login">
+            Sign in
+          </button>
 
           <div class="form-text mt-4">
             <p>

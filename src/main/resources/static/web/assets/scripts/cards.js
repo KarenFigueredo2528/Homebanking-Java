@@ -16,7 +16,7 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get(`http://localhost:8080/api/clients/1`)
+            axios.get(`http://localhost:8080/api/clients/current`)
                 .then(answer => {
                     this.cards = answer.data.cards
 
@@ -31,7 +31,13 @@ const options = {
                     this.thruDateCredit = this.credits.map(date => date.thruDate.slice(2, 7))
                     console.log(this.thruDateCredit);
                 }).catch(error => console.log("error"))
-
+        },
+        logOut(){
+            axios.post("/api/logout")
+            .then(response =>{
+                location.href = "../../index.html"
+            })
+            .catch(error=> console.log(error.message))
         }
     }
 }

@@ -1,112 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="../web/assets/style/style.css">
-    <link rel="shortcut icon" href="./multimedia/Mindhub Brothers-logos.jpeg" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../style/style.css" />
+    <link
+      rel="shortcut icon"
+      href="../images/Mindhub Brothers-logos.jpeg"
+      type="image/x-icon"
+    />
+    <link
+      rel="shortcut icon"
+      href="./multimedia/Mindhub Brothers-logos.jpeg"
+      type="image/x-icon"
+    />
     <title>Mindhub Brothers</title>
-</head>
+  </head>
 
-<body>
-<div id="app">
-    <nav class="d-flex justify-content-between px-5 align-items-center">
-        <img src="../web/assets/images/Mindhub%20Brothers-logos.jpeg" alt="logo" title="Mindhub Brothers Bank" class="logo">
-        <button class="animated-button ">
+  <body>
+    <div id="app">
+      <header
+        class="d-flex flex-column align-items-center text-center justify-content-center"
+      >
+        <nav class="d-flex justify-content-between px-5 align-items-center">
+          <img
+            src="../images/Mindhub Brothers-logos.jpeg"
+            alt="logo"
+            title="Mindhub Brothers Bank"
+            class="logo"
+          />
+          <button class="animated-button" @click.prevent="logOut">
             <span>Log out</span>
-        </button>
-    </nav>
-    <header class="d-flex flex-column align-items-center text-center justify-content-center">
+          </button>
+        </nav>
         <section class="text-light rounded-4 p-2 mx-2" id="section-header">
-            <H1>WELCOME MANAGER</H1>
-            <h3>Below you can see the administration of the Mindhub Brothers bank</h3>
+          <h1>WELCOME MANAGER</h1>
+          <h3>
+            Below you can see the administration of the Mindhub Brothers bank
+          </h3>
         </section>
-    </header>
+      </header>
 
-    <main>
-        <div class="container mt-5 ">
-            <form>
-                <h2>Client Manager</h2>
-                <div class="mb-3">
-                    <label for="name" class="form-label">First name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name..." v-model="firstName">
-                </div>
-                <div class="mb-3">
-                    <label for="lastName" class="form-label">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name..."
-                           v-model="lastName">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Email..." v-model="email">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <button type="submit" class="btn btn-primary" @click.prevent="voidInput">Add Client</button>
-            </form>
-            <div class="mt-5">
-                <table class="table table-bordered table-striped border border-primary">
-                    <h2>Client list</h2>
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <template v-if="clients.length > 0" v-for="(client, index) of clients">
-                        <tr>
-                            <td>{{index+1}}</td>
-                            <td>{{client.firstName}}</td>
-                            <td>{{client.lastName}}</td>
-                            <td>{{client.email}}</td>
-                        </tr>
-                    </template>
-                    <tr v-else>
-                        <td>0</td>
-                        <td>No show Data</td>
-                        <td>No show Data</td>
-                        <td>No show Data</td>
-                    </tr>
-                    </tbody>
-                </table>
+      <main>
+        <div class="container mt-5 text-light">
+          <form>
+            <h2>Client Manager</h2>
+            <div class="mb-3">
+              <label for="name" class="form-label">First name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Name..."
+                v-model="firstName"
+              />
             </div>
-            <div class="container mt-5">
-                <h2>Client REST response</h2>
-                <pre>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                placeholder="Last Name..."
+                v-model="lastName"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Email..."
+                v-model="email"
+              />
+              <div id="emailHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              @click.prevent="voidInput"
+            >
+              Add Client
+            </button>
+          </form>
+          <div class="mt-5">
+            <table
+              class="table table-bordered table-striped border border-primary"
+            >
+              <h2>Client list</h2>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <template
+                  v-if="clients.length > 0"
+                  v-for="(client, index) of clients"
+                >
+                  <tr>
+                    <td>{{index+1}}</td>
+                    <td>{{client.firstName}}</td>
+                    <td>{{client.lastName}}</td>
+                    <td>{{client.email}}</td>
+                  </tr>
+                </template>
+                <tr v-else>
+                  <td>0</td>
+                  <td>No show Data</td>
+                  <td>No show Data</td>
+                  <td>No show Data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="container mt-5 bg-warning p-2 rounded-4 text-dark">
+            <h2>Client REST response</h2>
+            <pre>
                     {{json}}
-                </pre>
-            </div>
+                </pre
+            >
+          </div>
         </div>
-    </main>
-</div>
-
-<footer class="d-flex align-items-center justify-content-around">
-    <img src="../web/assets/images/Mindhub%20Brothers-logos.jpeg" alt="logo" title="Logo Mindhub Brothers" class="logo">
-    <div class="d-flex justify-content-center gap-3 text-light">
-        <p>© All rights reserve to Karen Buitrago</p>
-        <a target="_blank" href="https://github.com/KarenBuitrago2825">Github to see more projects</a>
+      </main>
     </div>
-    <div class="flex-wrap d-flex">
-        <a target="_blank" href="https://es-la.facebook.com/"><img src="./web/assets/images/facebook (2).png"
-                                                                   alt="facebook" title="Facebook" class="network-icon"></a>
-        <a target="_blank" href="https://web.whatsapp.com/"><img src="./web/assets/images/whatsapp (2).png"
-                                                                 alt="whatsapp" title="Whatsapp" class="network-icon"></a>
-        <a href="tel: +57123456789"><img src="./web/assets/images/phone.png" alt="call-center" title="Call center"
-                                         class="network-icon"></a>
-    </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./manager.js"></script>
-</body>
+    <footer
+      class="d-flex flex-column justify-content-center align-items-center p-2 text-center"
+    >
+      <p class="text-light">
+        © 2023 Mindhub Brother, Inc | All right reserve to Karen Buitrago
+      </p>
+      <nav class="d-flex gap-3 justify-content-center">
+        <a href="https://github.com/KarenBuitrago2825"
+          ><img
+            src="../images/github-sign.png"
+            alt="github"
+            title="GitHub Karen Buitrago"
+            class="network-img"
+        /></a>
+        <a href="https://web.whatsapp.com/"
+          ><img
+            src="../images/whatsapp(1).png"
+            alt="whatsapp"
+            title="WhatsApp"
+            class="network-img"
+        /></a>
+        <a href="https://www.instagram.com/"
+          ><img
+            src="../images/instagram(1).png"
+            alt="instagram"
+            title="Instagram"
+            class="network-img"
+        /></a>
+        <a href="https://es-la.facebook.com/"
+          ><img
+            src="../images/facebook(1).png"
+            alt="facebok"
+            title="Facebook"
+            class="network-img"
+        /></a>
+        <a href="mailto: mindhubrothers@gmail.com"
+          ><img
+            src="../images/gmail.png"
+            alt="mail"
+            title="Mail"
+            class="network-img"
+        /></a>
+        <a href="tel: 654456987"
+          ><img
+            src="../images/customer-service.png"
+            alt="call-center"
+            title="Call Us"
+            class="network-img"
+        /></a>
+      </nav>
+    </footer>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./manager.js"></script>
+  </body>
 </html>

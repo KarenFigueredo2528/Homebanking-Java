@@ -22,6 +22,13 @@ const options ={
                 this.transaction = this.account.transactions.sort((a,b)=> b.id - a.id)
                 console.log(this.transaction);
             }).catch(error=>console.log("error"));
+        },
+        logOut(){
+            axios.post("/api/logout")
+            .then(response =>{
+                location.href = "../../index.html"
+            })
+            .catch(error=> console.log(error.message))
         }
     }
 }

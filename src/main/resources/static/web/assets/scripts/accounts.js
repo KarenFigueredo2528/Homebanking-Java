@@ -13,14 +13,21 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/api/clients/1")
+            axios.get("http://localhost:8080/api/clients/current")
                 .then(answer => {
                     this.clients = answer.data;
+                    console.log(this.client);
                     this.loans = this.clients.loans;
                     this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id);
                     console.log(this.loans);
                 }).catch((error) => console.log(error));
-
+        },
+        logOut(){
+            axios.post("/api/logout")
+            .then(response =>{
+                location.href = "../../index.html"
+            })
+            .catch(error=> console.log(error.message))
         }
     }
 }

@@ -17,12 +17,9 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/clients")
+            axios.get("http://localhost:8080/api/clients")
                 .then(answer => {
-                    console.log(answer);
-                    data = answer.data._embedded;
-                    console.log(data);
-                    this.clients = data.clients
+                    this.clients = answer.data
                     this.json = JSON.stringify(answer.data, null, 1)
                 }).catch((error => console.log(error)));
         },
@@ -32,7 +29,7 @@ const options = {
                 lastName: this.lastName,
                 email: this.email
             }
-            axios.post("http://localhost:8080/clients", newClient)
+            axios.post("http://localhost:8080/api/clients", newClient)
                 .then(answer => {
                     this.firstName = "",
                         this.lastName = "",
@@ -47,6 +44,13 @@ const options = {
             } else {
                 alert("Please fill in all required fields")
             }
+        },
+        logOut(){
+            axios.post("/api/logout")
+            .then(response =>{
+                location.href = "../index.html"
+            })
+            .catch(error=> console.log(error.message))
         }
     }
 }

@@ -1,14 +1,28 @@
 body{
+    height: 100vh;
     background-image: url("../images/background.jpg");
+      
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    
+}
+
+header{
+    background-color: #4f0769;
+}
+
+main{
+    padding: 2rem;
 }
 
 /*Form style*/
+
 form{
+    color: black;
     background-color: #d8e2dc;
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
 
 .btn{
@@ -17,4 +31,33 @@ form{
 
 .btn:hover{
     background-color: #505699;  
+}
+
+.animated-button{
+    background-color: cadetblue;
+    border-radius: 15px;
+    width: 10rem;
+    height: 2rem;
+}
+
+.animated-button:hover{
+    background-color: rgb(182, 18, 18);
+    color: white;
+}
+
+.logo{
+    width: 5rem;
+}
+
+footer{
+    background-color: #4f0769;
+    min-height: 10vh;
+}
+
+footer a{
+ text-decoration: none;
+}
+
+.network-img{
+    width: 2.5rem;
 }
