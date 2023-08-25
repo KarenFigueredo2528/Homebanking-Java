@@ -17,39 +17,39 @@ import javax.servlet.http.HttpSession;
 @Configuration
 public class WebAuthorization {
 
-    @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  @Bean
+  protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
-              .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
-              .antMatchers("/web/index.html","/web/register.html", "/web/index.js", "/web/style/**", "/web/images").permitAll()
-              .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN")
-              .antMatchers("/web/admiPages/**", "/web/style/style.css","/api/clients").hasAuthority("ADMIN")
-              .antMatchers(HttpMethod.GET, "/api/clients/current/**","/api/accounts").hasAuthority("CLIENT");
+    http.authorizeRequests()
+          .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
+          .antMatchers("/web/index.html", "/web/register.html", "/web/index.js", "/web/style/**", "/web/images").permitAll()
+          .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN")
+          .antMatchers("/web/admiPages/**", "/web/style/style.css", "/api/clients").hasAuthority("ADMIN")
+          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts").hasAuthority("CLIENT");
 
-        http.formLogin()
-              .usernameParameter("email")
-              .passwordParameter("password")
-              .loginPage("/api/login");
-        http.logout().logoutUrl("/api/logout");
+    http.formLogin()
+          .usernameParameter("email")
+          .passwordParameter("password")
+          .loginPage("/api/login");
+    http.logout().logoutUrl("/api/logout");
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-        http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
-        http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+    http.csrf().disable();
+    http.headers().frameOptions().disable();
+    http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+    http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
+    http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+    http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
-        return http.build();
+    return http.build();
+  }
+
+  private void clearAuthenticationAttributes(HttpServletRequest request) {
+
+    HttpSession session = request.getSession(false);
+
+    if (session != null) {
+      session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
     }
-
-    private void clearAuthenticationAttributes(HttpServletRequest request) {
-
-        HttpSession session = request.getSession(false);
-
-        if (session != null) {
-            session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
-        }
-    }
+  }
 }
