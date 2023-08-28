@@ -3,10 +3,10 @@ package com.mindhub.homebankingUno.models;
 public class NumerosAleatorios {
 
 	public static String CardNumber() {
-		return getRandomNumber(1000, 10000) + "-"
-			  + getRandomNumber(1000, 10000) + "-" +
-			  getRandomNumber(1000, 10000) + "-" +
-			  getRandomNumber(1000, 10000);
+		return getRandomNumber(0000, 9999) + "-"
+			  + getRandomNumber(0000, 9999) + "-" +
+			  getRandomNumber(0000, 9999) + "-" +
+			  getRandomNumber(0000, 9999);
 	}
 
 	public static int getCardCVV() {
