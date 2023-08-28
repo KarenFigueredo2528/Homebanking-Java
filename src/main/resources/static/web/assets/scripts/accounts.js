@@ -29,11 +29,24 @@ const options = {
             })
             .catch(error=> console.log(error.message))
         },
-        // createAccount(){
-        //     axios.post(""){
+            alert(){
+            let mensaje;
+            let opcion = confirm("Do you want to create a new account?");
+            if (opcion == true) {
+        
+                axios.post("http://localhost:8080/api/clients/current/accounts")
+                .then(response => {
+        
+                  location.href ="/web/assets/pages/accounts.html"}).catch(error => {
+                    window.alert("You have reached the account limit")
+            })
+        
+            } else {
+                mensaje = "Cancel";
+            }
+            document.getElementById("ejemplo").innerHTML = mensaje;
+        }
                 
-        //     }
-        // }
     }
 }
 const app = createApp(options);

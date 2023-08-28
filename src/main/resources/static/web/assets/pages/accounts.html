@@ -83,8 +83,9 @@
                             History</a>
                     </div>
                 </template>
-
-                <button class="createAccount"> Create new account </button>
+            <template v-if="accounts.length < 3">
+                <button class="createAccount" @click="alert"> Create new account </button>
+            </template>
             </div>
 
             <div class="mt-4 container">
