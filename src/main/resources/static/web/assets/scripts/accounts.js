@@ -28,7 +28,12 @@ const options = {
                 location.href = "../../index.html"
             })
             .catch(error=> console.log(error.message))
-        }
+        },
+        // createAccount(){
+        //     axios.post(""){
+                
+        //     }
+        // }
     }
 }
 const app = createApp(options);

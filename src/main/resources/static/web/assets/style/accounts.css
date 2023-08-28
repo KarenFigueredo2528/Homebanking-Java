@@ -321,3 +321,15 @@ footer {
   width: 2rem;
 }
 
+/*Button create*/
+.createAccount{
+  background-color: #6e094b;
+  color: white;
+  border: #6e094b;
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+
+.createAccount:hover{
+  background-color: #dc0f95;
+}
