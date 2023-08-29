@@ -22,10 +22,15 @@ public class WebAuthorization {
 
     http.authorizeRequests()
           .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
-          .antMatchers("/web/index.html", "/web/register.html", "/web/index.js", "/web/style/**", "/web/images").permitAll()
+          .antMatchers("/web/index.html", "/web/register.html", "/web/index.js", "/web/style/**", "/web/images/**").permitAll()
           .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN")
           .antMatchers("/web/admiPages/**", "/web/style/style.css", "/api/clients").hasAuthority("ADMIN")
-          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts").hasAuthority("CLIENT");
+          .antMatchers("/web/assets/**").hasAuthority("CLIENT")
+          .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards").hasAuthority("CLIENT")
+          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts").hasAuthority("CLIENT")
+
+          //Para que cualquier peticion que no este asignada sea dengada.
+          .anyRequest().denyAll();
 
     http.formLogin()
           .usernameParameter("email")

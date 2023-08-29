@@ -61,7 +61,7 @@
             <h1 class=" text-light text-center">Welcome to your account </h1>
         </header>
 
-        <main class=" d-flex justify-content-evenly flex-wrap container-fluid text-center my-2">
+        <main class=" d-flex justify-content-evenly flex-wrap container-fluid text-center my-2 align-items-center">
             <section>
                 <h2>DEBIT CARD</h2>
                 <template v-if="debits.length >0" v-for="(debit, index) of debits">
@@ -241,6 +241,7 @@
                 </template>
                 <h3 v-else> You don't have any credit cards to show</h3>
             </section>
+            <button class="createCard"><a href="./create-card.html">Create Card</a></button>
         </main>
 
         <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center ">

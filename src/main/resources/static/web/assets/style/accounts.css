@@ -322,7 +322,7 @@ footer {
 }
 
 /*Button create*/
-.createAccount{
+.createAccount, .createCard{
   background-color: #6e094b;
   color: white;
   border: #6e094b;
@@ -330,6 +330,25 @@ footer {
   padding: 0.5rem;
 }
 
-.createAccount:hover{
+.createAccount:hover , .createCard:hover{
   background-color: #dc0f95;
+}
+
+
+.createCard{
+  height: 2.5rem;
+  padding: 0.5rem; 
+}
+
+.createCard a {
+  color: white;
+  text-decoration: none;
+}
+
+main{
+  min-height: 50vh;
+}
+#main-cards{
+  background-color: #024f79;
+  
 }

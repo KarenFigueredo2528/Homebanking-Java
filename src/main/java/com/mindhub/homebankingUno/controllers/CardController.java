@@ -44,7 +44,7 @@ public class CardController {
 		int cardCvv = NumerosAleatorios.getCardCVV();
 
 		for (Card card : outClient.getCards()) {
-			if (card.getType().equals(type) && card.getColor().equals(color)){
+			if (card.getType().equals(type) && card.getColor().equals(color)) {
 				return new ResponseEntity<>("The card is already exist", HttpStatus.FORBIDDEN);
 			}
 		}
@@ -58,9 +58,10 @@ public class CardController {
 	}
 
 	@GetMapping("/clients/current/cards")
-	public List<CardDTO> getCards (Authentication authentication){
+	public List<CardDTO> getCards(Authentication authentication) {
 		return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(toList());
 	}
+
 
 
 }
