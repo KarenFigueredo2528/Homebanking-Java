@@ -39,7 +39,7 @@ const options = {
         axios
           .post("http://localhost:8080/api/clients/current/accounts")
           .then((response) => {
-            location.href = "/web/assets/pages/accounts.html";
+            location.href = "./accounts.html";
           })
           .catch((error) => {
             window.alert("You have reached the account limit");
