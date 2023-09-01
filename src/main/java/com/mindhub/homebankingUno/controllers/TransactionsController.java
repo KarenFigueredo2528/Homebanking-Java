@@ -41,13 +41,15 @@ public class TransactionsController {
 		  @RequestParam String description, @RequestParam String originAccount,
 		  @RequestParam String finalAccount) {
 
+		if(finalAccount.isBlank()){
+			return new ResponseEntity<>("Ups! you have to fill the account number to complete de transaction" , HttpStatus.FORBIDDEN);
+		}
+
+
 		Client clientAuth = clientRepository.findByEmail(authetication.getName());
 		Account accOrigin = accountRepository.findByNumber(originAccount);
 		Account accDestination = accountRepository.findByNumber(finalAccount);
 
-		if(finalAccount.isBlank()){
-			return new ResponseEntity<>("Ups! you have to fill the account number to complete de transaction" , HttpStatus.FORBIDDEN);
-		}
 
 		if (amount <= 0 ){
 			return new ResponseEntity<>("The amount must be greater than 0", HttpStatus.FORBIDDEN);
@@ -57,16 +59,17 @@ public class TransactionsController {
 			return new ResponseEntity<>("It looks like you don't have a shipping description, try again" , HttpStatus.FORBIDDEN);
 		}
 
-		if(originAccount.equals(finalAccount)){
-			return new ResponseEntity<>("Origin account and destination account cannot be the same", HttpStatus.FORBIDDEN);
-		}
-
 		if(accOrigin == null){
 			return new ResponseEntity<>("Origin account does not exist", HttpStatus.FORBIDDEN);
 		}
 
 		if(accDestination == null){
 			return new ResponseEntity<>("Origin account does not exist", HttpStatus.FORBIDDEN);
+		}
+
+
+		if(originAccount.equals(finalAccount)){
+			return new ResponseEntity<>("Origin account and destination account cannot be the same", HttpStatus.FORBIDDEN);
 		}
 
 		if(accOrigin.getBalance() < amount){
