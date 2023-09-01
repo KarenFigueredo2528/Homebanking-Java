@@ -12,14 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Transactional
-@RequestMapping("/api")
+@RestController
+//@RequestMapping("/api")
 public class TransactionsController {
 
 	@Autowired
@@ -31,8 +34,8 @@ public class TransactionsController {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-
-	@RequestMapping("/transactions")
+	@Transactional
+	@PostMapping("/api/transactions")
 	public ResponseEntity<Object> createTransaction(
 		  Authentication authetication, @RequestParam double amount,
 		  @RequestParam String description, @RequestParam String originAccount,
@@ -42,7 +45,19 @@ public class TransactionsController {
 		Account accOrigin = accountRepository.findByNumber(originAccount);
 		Account accDestination = accountRepository.findByNumber(finalAccount);
 
-		if(accOrigin.getNumber() == accDestination.getNumber()){
+		if(finalAccount.isBlank()){
+			return new ResponseEntity<>("Ups! you have to fill the account number to complete de transaction" , HttpStatus.FORBIDDEN);
+		}
+
+		if (amount <= 0 ){
+			return new ResponseEntity<>("The amount must be greater than 0", HttpStatus.FORBIDDEN);
+		}
+
+		if(description.isBlank()){
+			return new ResponseEntity<>("It looks like you don't have a shipping description, try again" , HttpStatus.FORBIDDEN);
+		}
+
+		if(originAccount.equals(finalAccount)){
 			return new ResponseEntity<>("Origin account and destination account cannot be the same", HttpStatus.FORBIDDEN);
 		}
 
@@ -54,14 +69,6 @@ public class TransactionsController {
 			return new ResponseEntity<>("Origin account does not exist", HttpStatus.FORBIDDEN);
 		}
 
-		if (amount > 0 ){
-			return new ResponseEntity<>("The amount must be greater than 0", HttpStatus.FORBIDDEN);
-		}
-
-		if(description.isBlank()){
-			return new ResponseEntity<>("It looks like you don't have a shipping description, try again" , HttpStatus.FORBIDDEN);
-		}
-
 		if(accOrigin.getBalance() < amount){
 			return  new ResponseEntity<>("Insufficient amount", HttpStatus.FORBIDDEN);
 		}
@@ -69,10 +76,10 @@ public class TransactionsController {
 			accOrigin.setBalance(accOrigin.getBalance() - amount);
 			accDestination.setBalance(accDestination.getBalance() + amount);
 
-			Transaction transfer1 = new Transaction(amount, description, LocalDateTime.now(), TransactionType.DEBIT);
+			Transaction transfer1 = new Transaction(amount, description + " " + accOrigin.getNumber(), LocalDateTime.now(), TransactionType.DEBIT);
 			accOrigin.addTransfer(transfer1);
 			transactionRepository.save(transfer1);
-			Transaction transfer2 = new Transaction(amount, description, LocalDateTime.now(), TransactionType.CREDIT);
+			Transaction transfer2 = new Transaction(amount, description+" "+ accDestination.getNumber(), LocalDateTime.now(), TransactionType.CREDIT);
 			accDestination.addTransfer(transfer2);
 			transactionRepository.save(transfer2);
 

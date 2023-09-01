@@ -26,8 +26,8 @@ public class WebAuthorization {
           .antMatchers("/rest", "/h2-console/").hasAuthority("ADMIN")
           .antMatchers("/web/admiPages/**", "/web/style/style.css", "/api/clients").hasAuthority("ADMIN")
           .antMatchers("/web/assets/**").hasAuthority("CLIENT")
-          .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards").hasAuthority("CLIENT")
-          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts/{id}").hasAuthority("CLIENT")
+          .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions").hasAuthority("CLIENT")
+          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts/{id}", "/api/accounts").hasAuthority("CLIENT")
 
           //Para que cualquier peticion que no este asignada sea dengada.
           .anyRequest().denyAll();
