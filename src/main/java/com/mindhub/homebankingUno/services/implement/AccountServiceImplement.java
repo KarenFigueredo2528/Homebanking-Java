@@ -27,5 +27,10 @@ public class AccountServiceImplement implements AccountService {
 		return accountRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public void saveAccount(Account account) {
+		accountRepository.save(account);
+	}
+
 
 }

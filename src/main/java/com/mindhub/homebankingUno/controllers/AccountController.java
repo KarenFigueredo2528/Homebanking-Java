@@ -55,13 +55,13 @@ public class AccountController {
 
 	@PostMapping("/api/clients/current/accounts")
 	public ResponseEntity<Object> newAccount (Authentication authentication){
-		Client authClient = clientRepository.findByEmail(authentication.getName());
+		Client authClient = clientService.findByEmail(authentication.getName());
 
 		if(authClient.getAccounts().size() < 3 ){
 			int numRandom = NumerosAleatorios.getRandomNumber(100000,10000000);
 			Account newAccount = new Account("VIN-"+numRandom, LocalDate.now(),0);
 			authClient.addAccounts(newAccount);
-			repoAccount.save(newAccount);
+			accountService.saveAccount(newAccount);
 		}else{
 			return new ResponseEntity<>("You have reached the maximum number of accounts", HttpStatus.FORBIDDEN);
 		}

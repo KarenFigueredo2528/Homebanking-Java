@@ -5,6 +5,8 @@ import com.mindhub.homebankingUno.dtos.ClientDTO;
 import com.mindhub.homebankingUno.models.*;
 import com.mindhub.homebankingUno.repositories.CardRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
+import com.mindhub.homebankingUno.services.CardService;
+import com.mindhub.homebankingUno.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,16 @@ public class CardController {
 	@Autowired
 	private ClientRepository clientRepository;
 
+	@Autowired
+	private CardService cardService;
+
+	@Autowired
+	private ClientService clientService;
+
 	@PostMapping("/clients/current/cards")
 	public ResponseEntity<Object> newCard(
 		  @RequestParam CardColor color, @RequestParam CardType type, Authentication authentication) {
-		Client outClient = clientRepository.findByEmail(authentication.getName());
+		Client outClient = clientService.findByEmail(authentication.getName());
 
 		if (color == null || type == null) {
 			return new ResponseEntity<>("Spaces cannot be empty", HttpStatus.FORBIDDEN);
@@ -39,7 +47,7 @@ public class CardController {
 		String cardNumber;
 		do {
 			cardNumber = NumerosAleatorios.CardNumber();
-		} while (cardRepository.findByNumber(cardNumber) != null);
+		} while (cardService.findByNumber(cardNumber) != null);
 
 		int cardCvv = NumerosAleatorios.getCardCVV();
 
@@ -52,7 +60,7 @@ public class CardController {
 		Card newCard = new Card(outClient.getFirstName() + " " + outClient.getLastName(), type, color, cardNumber, cardCvv,
 			  LocalDate.now(), LocalDate.now().plusYears(5));
 		outClient.addCards(newCard);
-		cardRepository.save(newCard);
+		cardService.saveCard(newCard);
 
 		return new ResponseEntity<>("Card created", HttpStatus.CREATED);
 	}
@@ -61,7 +69,6 @@ public class CardController {
 	public List<CardDTO> getCards(Authentication authentication) {
 		return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(toList());
 	}
-
 
 
 }
