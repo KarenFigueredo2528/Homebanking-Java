@@ -352,3 +352,20 @@ main{
   background-color: #024f79;
   
 }
+
+#button-loan{
+  background-color: #00797d;
+  border-radius: 15px;
+  border-color: #024f79;
+  color:white;
+}
+
+#button-loan:hover{
+  background-color: #ffcb0f;
+  color: black;
+}
+
+#a-loan{
+  color: white;
+  text-decoration:none ;
+}

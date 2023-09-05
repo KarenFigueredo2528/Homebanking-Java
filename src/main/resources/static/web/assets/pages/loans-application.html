@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet" />
-    <title>Accounts | MindHub Brothers</title>
+    <title>Loan Application | MindHub Brothers</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav ms-auto gap-3">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold" href="#">ACCOUNTS
+                            <a class="nav-link  " href="./accounts.html">ACCOUNTS
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -35,7 +35,7 @@
                             <a class="nav-link" href="./cards.html">CARDS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./loans-application.html">LOANS</a>
+                            <a class="nav-link active fw-bold" href="#">LOANS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./transfers.html">TRANSACTION</a>
@@ -56,68 +56,13 @@
         </nav>
         <header>
             <h1 class="text-light text-center">
-                Welcome to your account {{clients.firstName}}
+                Welcome to Laon Application 
             </h1>
         </header>
 
-        <main
-            class="d-flex flex-column flex-lg-row py-3 container justify-content-around container align-items-center flex-wrap">
-            <img src="../images/animation_1.png" alt="animation_1" id="img-ani"
-                class="col-sm-5 col-12 align-items-center" />
-            <div class="d-flex flex-column flex-md-row align-items-center gap-3 flex-wrap">
-                <template v-if="accounts.length > 0" v-for="account of accounts">
-                    <div class="card-container d-flex flex-column align-items-center">
-                        <div class="card">
-                            <div class="front-content">
-                                <p>Account: {{account.number}}</p>
-                            </div>
-                            <div class="content">
-                                <h2>Details</h2>
-                                <h5>Balance: {{account.balance}}</h5>
-                                <h5>Creation Date: {{account.creationDate}}</h5>
-                            </div>
-                        </div>
-                        <a :href="'./account.html?id='+account.id" class="btn text-center mt-2 text-light"
-                            id="btn-transaction">Transaction History</a>
-                    </div>
-                </template>
-                <template v-if="accounts.length < 3">
-                    <button class="createAccount" @click="alert">
-                        Create new account
-                    </button>
-                </template>
-            </div>
+       <main>
 
-            <div class="mt-4 container">
-                <table class="table table-bordered table-striped border border-danger">
-                    <section class="d-flex justify-content-center gap-3 my-5">
-                        <h2 class="text-center">Loans Resume:</h2>
-                        <button id="button-loan" class="px-3"><a href="./loans-application.html" id="a-loan">Apply Loan</a></button>
-                    </section>
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="loans.length >0 " v-for="loan of loans">
-                            <tr>
-                                <td>{{loan.name}}</td>
-                                <td>{{loan.amount}}</td>
-                                <td>{{loan.payments}}</td>
-                            </tr>
-                        </template>
-                        <tr v-else>
-                            <td>0</td>
-                            <td>No show Data</td>
-                            <td>No show Data</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+       </main>
 
         <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center">
             <p class="text-light">

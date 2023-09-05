@@ -5,8 +5,8 @@ const options = {
     return {
       email: "",
       password: "",
-      firstName:"",
-      lastName:""
+      firstName: "",
+      lastName: "",
     };
   },
   created() {},
@@ -18,8 +18,7 @@ const options = {
           if (this.email == "admin@admin.com") {
             location.href = "./admiPages/manager.html";
           } else {
-            window.location.href =
-              "./assets/pages/accounts.html";
+            window.location.href = "./assets/pages/accounts.html";
           }
         })
         .catch((error) => {
@@ -30,18 +29,22 @@ const options = {
       event.preventDefault();
       console.log("no te calentes martin");
       axios
-      .post("/api/clients",`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,{headers:{'content-type': 'application/x-www-form-urlencoded'}})
-        .then((response) =>{
-            this.login()
-        }) 
-        .catch((error) => 
-        Swal.fire({
-          title: 'Error!',
-          text: error.message,
-          icon: 'error',
-          confirmButtonText: 'Cool'
+        .post(
+          "/api/clients",
+          `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
+          { headers: { "content-type": "application/x-www-form-urlencoded" } }
+        )
+        .then((response) => {
+          this.login();
         })
-      );
+        .catch((error) =>
+          Swal.fire({
+            title: "Error!",
+            text: error.message,
+            icon: "error",
+            confirmButtonText: "Cool",
+          })
+        );
     },
   },
 };

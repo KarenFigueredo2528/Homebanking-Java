@@ -7,273 +7,275 @@ nav {
 }
 
 /*Log out #14274f*/
-.animated-button{
-    background-color: cadetblue;
-    border-radius: 15px;
-    width: 10rem;
-    height: 2rem;
+.animated-button {
+  background-color: cadetblue;
+  border-radius: 15px;
+  width: 10rem;
+  height: 2rem;
 }
 
-.animated-button:hover{
-    background-color: rgb(182, 18, 18);
-    color: white;
+.animated-button:hover {
+  background-color: rgb(182, 18, 18);
+  color: white;
 }
 
 /*Header*/
-header{
-    min-height: 10vh;
+header {
+  min-height: 10vh;
 }
 
-#section-header, .btn, footer{
-    background-color: #14274f;
+#section-header,
+.btn,
+footer {
+  background-color: #14274f;
 }
 
-body{
-    background-color: #ccdbfd;
+body {
+  background-color: #ccdbfd;
 }
 
 /*Main*/
 
-main{
-    min-height: 80vh;
+main {
+  min-height: 80vh;
 }
 
 .card-container {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .card {
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-  }
-  
-  .card .front-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
-  }
-  
-  .card .front-content p {
-    font-size: 32px;
-    font-weight: 700;
-    opacity: 1;
-    background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
-  }
-  
-  .card .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 10px;
-    background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
-    color: #e8e8e8;
-    padding: 20px;
-    line-height: 1.5;
-    border-radius: 5px;
-    pointer-events: none;
-    transform: translateX(-96%);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-  }
-  
-  .card .content .heading {
-    font-size: 32px;
-    font-weight: 700;
-  }
-  
-  .card:hover .content {
-    transform: translateY(0);
-  }
-  
-  .card:hover .front-content {
-    transform: translateX(-30%);
-  }
-  
-  .card:hover .front-content p {
-    opacity: 0;
-  }
-  
-  #btn-transaction{
-    background-color: #003049;
-  }
-  #btn-transaction:hover{
-   background-color: #0f2fff;
-  }
-  
-  .flip-card {
-    background-color: transparent;
-    width: 20rem;
-    height: 12rem;
-    perspective: 1000px;
-    color: white;
-  }
-  
-  .heading_8264 {
-    position: absolute;
-    letter-spacing: .2em;
-    font-size: .8rem;
-    top: 2em;
-    left: 15.6em;
-  }
-  
-  .logo {
-    position: absolute;
-    width: 8rem;
-    top: 6.8em;
-    left: 11.7em;
-  }
-  
-  .chip {
-    position: absolute;
-    top: 2.3em;
-    left: 1.5em;
-  }
-  
-  .contactless {
-    position: absolute;
-    top: 3.5em;
-    left: 12.4em;
-  }
-  
-  .number {
-    position: absolute;
-    font-weight: bold;
-    font-size: 1em;
-    top: 8.3em;
-    left: 1.6em;
-  }
-  
-  .valid_thru {
-    position: absolute;
-    font-weight: bold;
-    top: 635.8em;
-    font-size: .01em;
-    left: 140.3em;
-  }
-  
-  .date_8264 {
-    position: absolute;
-    font-weight: bold;
-    font-size: 0.5em;
-    top: 13.6em;
-    left: 3.2em;
-  }
-  
-  .name {
-    position: absolute;
-    font-weight: bold;
-    font-size: .8rem;
-    top: 9em;
-    left: 2em;
-  }
-  
-  .strip {
-    position: absolute;
-    background-color: black;
-    width: 15em;
-    height: 1.5em;
-    top: 2.4em;
-    background: repeating-linear-gradient(
-      45deg,
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.card .front-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+.card .front-content p {
+  font-size: 32px;
+  font-weight: 700;
+  opacity: 1;
+  background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1)
+}
+
+.card .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+  color: #e8e8e8;
+  padding: 20px;
+  line-height: 1.5;
+  border-radius: 5px;
+  pointer-events: none;
+  transform: translateX(-96%);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card .content .heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card:hover .content {
+  transform: translateY(0);
+}
+
+.card:hover .front-content {
+  transform: translateX(-30%);
+}
+
+.card:hover .front-content p {
+  opacity: 0;
+}
+
+#btn-transaction {
+  background-color: #003049;
+}
+
+#btn-transaction:hover {
+  background-color: #0f2fff;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 20rem;
+  height: 12rem;
+  perspective: 1000px;
+  color: white;
+}
+
+.heading_8264 {
+  position: absolute;
+  letter-spacing: .2em;
+  font-size: .8rem;
+  top: 2em;
+  left: 15.6em;
+}
+
+.logo {
+  position: absolute;
+  width: 8rem;
+  top: 6.8em;
+  left: 11.7em;
+}
+
+.chip {
+  position: absolute;
+  top: 2.3em;
+  left: 1.5em;
+}
+
+.contactless {
+  position: absolute;
+  top: 3.5em;
+  left: 12.4em;
+}
+
+.number {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1em;
+  top: 8.3em;
+  left: 1.6em;
+}
+
+.valid_thru {
+  position: absolute;
+  font-weight: bold;
+  top: 635.8em;
+  font-size: .01em;
+  left: 140.3em;
+}
+
+.date_8264 {
+  position: absolute;
+  font-weight: bold;
+  font-size: 0.5em;
+  top: 13.6em;
+  left: 3.2em;
+}
+
+.name {
+  position: absolute;
+  font-weight: bold;
+  font-size: .8rem;
+  top: 9em;
+  left: 2em;
+}
+
+.strip {
+  position: absolute;
+  background-color: black;
+  width: 15em;
+  height: 1.5em;
+  top: 2.4em;
+  background: repeating-linear-gradient(45deg,
       #303030,
       #303030 10px,
       #202020 10px,
-      #202020 20px
-    );
-  }
-  
-  .mstrip {
-    position: absolute;
-    background-color: rgb(255, 255, 255);
-    width: 8em;
-    height: 0.8em;
-    top: 5em;
-    left: .8em;
-    border-radius: 2.5px;
-  }
-  
-  .sstrip {
-    position: absolute;
-    background-color: rgb(255, 255, 255);
-    width: 4.1em;
-    height: 0.8em;
-    top: 5em;
-    left: 10em;
-    border-radius: 2.5px;
-  }
-  
-  .code {
-    font-weight: bold;
-    text-align: center;
-    margin: .2em;
-    color: black;
-  }
-  
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-front, .flip-card-back {
-    box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 1rem;
-  }
-  
-  .flip-card-front {
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    background-color: #171717;
-  }
-  
-  .flip-card-back {
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    background-color: #171717;
-    transform: rotateY(180deg);
-  }
+      #202020 20px);
+}
+
+.mstrip {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  width: 8em;
+  height: 0.8em;
+  top: 5em;
+  left: .8em;
+  border-radius: 2.5px;
+}
+
+.sstrip {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  width: 4.1em;
+  height: 0.8em;
+  top: 5em;
+  left: 10em;
+  border-radius: 2.5px;
+}
+
+.code {
+  font-weight: bold;
+  text-align: center;
+  margin: .2em;
+  color: black;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+.flip-card-front {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #171717;
+}
+
+.flip-card-back {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #171717;
+  transform: rotateY(180deg);
+}
+
 /*Footer*/
 
-footer{
-    min-height: 10vh;
+footer {
+  min-height: 10vh;
 }
 
-footer a{
- text-decoration: none;
+footer a {
+  text-decoration: none;
 }
 
-.network-icon{
-    width: 2.5rem;
+.network-icon {
+  width: 2.5rem;
 }
-
