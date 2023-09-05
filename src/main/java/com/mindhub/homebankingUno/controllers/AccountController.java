@@ -6,6 +6,8 @@ import com.mindhub.homebankingUno.models.Client;
 import com.mindhub.homebankingUno.models.NumerosAleatorios;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
+import com.mindhub.homebankingUno.services.AccountService;
+import com.mindhub.homebankingUno.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +30,21 @@ public class AccountController {
 	@Autowired
 	private ClientRepository clientRepository;
 
+	@Autowired
+	private AccountService accountService;
+
+	@Autowired
+	private ClientService clientService;
+
 	@RequestMapping("/api/accounts")
 	public List<AccountDTO> getAccounts() {
-		return repoAccount.findAll().stream().map(AccountDTO::new).collect(toList());
+		return accountService.getAccountsDTO();
 	}
 
 	@RequestMapping("/api/accounts/{id}")
 	public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication) {
-		Client authClient = clientRepository.findByEmail(authentication.getName());
-		Account getAccount = repoAccount.findById(id).orElse(null);
+		Client authClient = clientService.findByEmail(authentication.getName());
+		Account getAccount = accountService.findById(id);
 
         if(authClient.getId() == getAccount.getClient().getId()){
             return new ResponseEntity<>(new AccountDTO(getAccount), HttpStatus.ACCEPTED);
