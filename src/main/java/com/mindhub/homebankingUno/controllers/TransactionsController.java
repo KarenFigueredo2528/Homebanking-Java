@@ -8,6 +8,9 @@ import com.mindhub.homebankingUno.models.TransactionType;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
 import com.mindhub.homebankingUno.repositories.TransactionRepository;
+import com.mindhub.homebankingUno.services.AccountService;
+import com.mindhub.homebankingUno.services.ClientService;
+import com.mindhub.homebankingUno.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,16 @@ public class TransactionsController {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
+	@Autowired
+	private AccountService accountService;
+
+	@Autowired
+	private TransactionService transactionService;
+
+	@Autowired
+	private ClientService clientService;
+
+
 	@Transactional
 	@PostMapping("/api/transactions")
 	public ResponseEntity<Object> createTransaction(
@@ -45,7 +58,8 @@ public class TransactionsController {
 		}
 
 
-		Client clientAuth = clientRepository.findByEmail(authetication.getName());
+		Client clientAuth = clientService.findByEmail(authetication.getName());
+		/*Pueden linea 63 y 64 cambiar su accountRepository*/
 		Account accOrigin = accountRepository.findByNumber(originAccount);
 		Account accDestination = accountRepository.findByNumber(finalAccount);
 
@@ -80,13 +94,13 @@ public class TransactionsController {
 
 			Transaction transfer1 = new Transaction(amount, description + " " + accOrigin.getNumber(), LocalDateTime.now(), TransactionType.DEBIT);
 			accOrigin.addTransfer(transfer1);
-			transactionRepository.save(transfer1);
+			transactionService.saveTransaction(transfer1);
 			Transaction transfer2 = new Transaction(amount, description+" "+ accDestination.getNumber(), LocalDateTime.now(), TransactionType.CREDIT);
 			accDestination.addTransfer(transfer2);
-			transactionRepository.save(transfer2);
+			transactionService.saveTransaction(transfer2);
 
-			accountRepository.save(accOrigin);
-			accountRepository.save(accDestination);
+			accountService.saveAccount(accOrigin);
+			accountService.saveAccount(accDestination);
 
 		}
 
