@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @RestController
-//@RequestMapping("/api")
 public class TransactionsController {
 
 	@Autowired

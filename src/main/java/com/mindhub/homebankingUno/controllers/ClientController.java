@@ -6,6 +6,7 @@ import com.mindhub.homebankingUno.models.Client;
 import com.mindhub.homebankingUno.models.NumerosAleatorios;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
+import com.mindhub.homebankingUno.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +29,17 @@ public class ClientController {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private ClientService clientService;
+
     @RequestMapping("/clients")
     public List<ClientDTO> getClients() {
-        return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
+        return clientService.getClientsDTO();
     }
 
     @RequestMapping("/clients/{current}")
     public ClientDTO getClient(Authentication authentication) {
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+        return clientService.getCurrentClient(authentication.getName());
     }
 
     @Autowired
@@ -55,7 +59,7 @@ public class ClientController {
         }
 
         Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
-        clientRepository.save(client);
+        clientService.saveClient(client);
         int numberAccount = NumerosAleatorios.getRandomNumber(100000,10000000);
         Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(),0);
         client.addAccounts(newAccount);
