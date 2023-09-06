@@ -45,10 +45,6 @@ const options = {
             window.alert("You have reached the account limit");
           });
       }
-      // } else {
-      //     mensaje = "Cancel";
-      // }
-      // document.getElementById("ejemplo").innerHTML = mensaje;
     },
   },
 };

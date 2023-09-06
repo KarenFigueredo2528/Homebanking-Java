@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,37 +33,41 @@ public class AccountController {
 	@Autowired
 	private ClientService clientService;
 
-	@RequestMapping("/api/accounts")
+	/*@RequestMapping("/api/accounts")
 	public List<AccountDTO> getAccounts() {
 		return accountService.getAccountsDTO();
-	}
+	}*/
 
 	@RequestMapping("/api/accounts/{id}")
 	public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication) {
 		Client authClient = clientService.findByEmail(authentication.getName());
 		Account getAccount = accountService.findById(id);
 
-        if(authClient.getId() == getAccount.getClient().getId()){
-            return new ResponseEntity<>(new AccountDTO(getAccount), HttpStatus.ACCEPTED);
-        }else{
+		if (authClient.getId() == getAccount.getClient().getId()) {
+			return new ResponseEntity<>(new AccountDTO(getAccount), HttpStatus.ACCEPTED);
+		} else {
 			return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
-        }
+		}
 	}
 
 	@PostMapping("/api/clients/current/accounts")
-	public ResponseEntity<Object> newAccount (Authentication authentication){
+	public ResponseEntity<Object> newAccount(Authentication authentication) {
 		Client authClient = clientService.findByEmail(authentication.getName());
 
-		if(authClient.getAccounts().size() < 3 ){
-			int numRandom = NumerosAleatorios.getRandomNumber(100000,10000000);
-			Account newAccount = new Account("VIN-"+numRandom, LocalDate.now(),0);
+		if (authClient.getAccounts().size() < 3) {
+			int numRandom = NumerosAleatorios.getRandomNumber(100000, 10000000);
+			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0);
 			authClient.addAccounts(newAccount);
 			accountService.saveAccount(newAccount);
-		}else{
+		} else {
 			return new ResponseEntity<>("You have reached the maximum number of accounts", HttpStatus.FORBIDDEN);
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
+	@GetMapping("/api/clients/current/accounts")
+	public List<AccountDTO> getAccounts(){
+		return accountService.getAccountsDTO();
+	}
 
 }

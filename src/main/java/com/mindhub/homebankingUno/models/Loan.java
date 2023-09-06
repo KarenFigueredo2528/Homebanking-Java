@@ -70,4 +70,16 @@ public class Loan {
         clientLoan.setLoan(this);
         this.clientLoans.add(clientLoan);
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
+    }
+
+    public void setClientLoans(Set<ClientLoan> clientLoans) {
+        this.clientLoans = clientLoans;
+    }
 }

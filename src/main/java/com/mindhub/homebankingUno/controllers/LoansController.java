@@ -6,6 +6,9 @@ import com.mindhub.homebankingUno.dtos.LoanDTO;
 import com.mindhub.homebankingUno.models.*;
 import com.mindhub.homebankingUno.repositories.*;
 import com.mindhub.homebankingUno.services.AccountService;
+import com.mindhub.homebankingUno.services.ClientLoanService;
+import com.mindhub.homebankingUno.services.ClientService;
+import com.mindhub.homebankingUno.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +28,6 @@ import static java.util.stream.Collectors.toList;
 public class LoansController {
 
 	@Autowired
-	private CardRepository cardRepository;
-
-	@Autowired
-	private ClientRepository clientRepository;
-
-	@Autowired
 	private AccountRepository accountRepository;
 
 	@Autowired
@@ -48,16 +45,25 @@ public class LoansController {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-	@RequestMapping(path = "/loans")
+	@Autowired
+	private ClientService clientService;
+
+	@Autowired
+	private LoanService loanService;
+
+	@Autowired
+	private ClientLoanService clientLoanService;
+
+	@GetMapping("/loans")
 	public List<LoanDTO> getLoans() {
-		return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
+		return loanService.getAll();
 	}
 
 	@Transactional
 	@RequestMapping(path = "/loans", method = RequestMethod.POST)
 	public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication authentication) {
 
-		Client client = clientRepository.findByEmail(authentication.getName());
+		Client client = clientService.findByEmail(authentication.getName());
 		Account account = accountRepository.findByNumber(loanApplicationDTO.getNumberAccountDestination());
 		Loan loan = loanRepository.findById(loanApplicationDTO.getId());
 
@@ -93,15 +99,24 @@ public class LoansController {
 			return new ResponseEntity<>("This account doesn't match",HttpStatus.UNAUTHORIZED);
 		}
 
-		account.setBalance(account.getBalance()+ loanApplicationDTO.getAmount());
+		if(clientLoanService.existsByClientAndLoan(client, loan)) {
+			return new ResponseEntity<>("The client already has this loan", HttpStatus.FORBIDDEN);
+		}
+
 		ClientLoan clientLoan = new ClientLoan (loanApplicationDTO.getAmount() * 1.2, loanApplicationDTO.getPayments());
 		clientLoan.setClient(client);
 		clientLoan.setLoan(loan);
 		clientLoanRepository.save(clientLoan);
+
 		String transactionStatus = loan.getName() + "Loan Approved";
 		Transaction transaction = new Transaction(loanApplicationDTO.getAmount(),transactionStatus, LocalDateTime.now(), TransactionType.CREDIT);
 		transactionRepository.save(transaction);
-		accountRepository.save(account);
+
+		account.setBalance(account.getBalance()+ loanApplicationDTO.getAmount());
+		accountService.saveAccount(account);
+		account.addTransfer(transaction);
+		clientService.saveClient(client);
+
 		return new ResponseEntity<>("The loan was created",HttpStatus.ACCEPTED);
 	}
 
