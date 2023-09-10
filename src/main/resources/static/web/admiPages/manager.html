@@ -8,24 +8,34 @@
   <link rel="stylesheet" href="../style/style.css" />
   <link rel="shortcut icon" href="../images/Mindhub Brothers-logos.jpeg" type="image/x-icon" />
   <link rel="shortcut icon" href="./multimedia/Mindhub Brothers-logos.jpeg" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital@1&family=Roboto+Slab&display=swap"
+    rel="stylesheet" />
   <title>Mindhub Brothers</title>
 </head>
 
 <body>
+  
   <div id="app">
-    <header class="d-flex flex-column align-items-center text-center justify-content-center">
-      <nav class="d-flex justify-content-between px-5 align-items-center">
-        <img src="../images/Mindhub Brothers-logos.jpeg" alt="logo" title="Mindhub Brothers Bank" class="logo" />
-        <button class="animated-button" @click.prevent="logOut">
-          <span>Log out</span>
-        </button>
-      </nav>
+
+    <header class="d-flex align-items-center text-center justify-content-around flex-wrap p-2">
+      <img src="../images/Mindhub Brothers-logos.jpeg" alt="logo" title="Mindhub Brothers Bank"
+        class="logo rounded-5 d-md-none d-lg-block" />
       <section class="text-light rounded-4 p-2 mx-2" id="section-header">
-        <h1>WELCOME MANAGER | MindHub Brothers</h1>
+        <h1>WELCOME MANAGER</h1>
         <h3>
           Below you can see the administration of the Mindhub Brothers bank
         </h3>
       </section>
+
+      <div class="d-flex flex-lg-column align-items-center gap-3">
+        <button class="animated-button" @click.prevent="logOut">
+          <span>Log out</span>
+        </button>
+
+        <button type="button" class="rounded-4 px-3" id="bg-dark">DARK MODE</button>
+
     </header>
 
     <main>
@@ -48,7 +58,7 @@
               We'll never share your email with anyone else.
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" @click.prevent="voidInput">
+          <button type="submit" class="btn btn-primary" id="button-add" @click.prevent="voidInput">
             Add Client
           </button>
         </form>
@@ -82,7 +92,7 @@
             </tbody>
           </table>
         </div>
-        <div class="container mt-5 bg-warning p-2 rounded-4 text-dark">
+        <div class="container mt-5 p-2 rounded-4 text-light" id="json">
           <h2>Client REST response</h2>
           <pre>
                     {{json}}
@@ -90,6 +100,7 @@
         </div>
       </div>
     </main>
+
   </div>
 
   <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center">

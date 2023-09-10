@@ -29,11 +29,11 @@ public class HomebankingUnoApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
+    public CommandLineRunner initData(/*ClientRepository clientRepository, AccountRepository accountRepository,
                                       TransactionRepository transactionRepository, LoanRepository loanRepository,
-                                      ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
+                                      ClientLoanRepository clientLoanRepository, CardRepository cardRepository*/) {
         return (args) -> {
-            // save a couple of clients
+            /*// save a couple of clients
             Client client = new Client("Melba", "Morel", "melba@mindhub.com",passwordEncoder.encode("123456"));
             Client client2 = new Client("admin", "admin", "admin@admin.com",passwordEncoder.encode("456789"));
 
@@ -103,6 +103,6 @@ public class HomebankingUnoApplication {
             cardRepository.save(titaniumCard);
             cardRepository.save(silver);
 
-        };
+        */};
     }
 }
