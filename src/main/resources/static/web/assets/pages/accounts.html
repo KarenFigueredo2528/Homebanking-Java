@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-lg" data-bs-theme="dark" id="bg-nav">
             <div class="container-fluid">
@@ -66,9 +67,9 @@
                 class="col-sm-5 col-12 align-items-center" />
             <div class="d-flex flex-column flex-md-row align-items-center gap-3 flex-wrap">
                 <template v-if="accounts.length > 0" v-for="account of accounts">
-                    <div class="card-container d-flex flex-column align-items-center">
+                    <div class="card-container d-flex flex-column align-items-center ">
                         <div class="card">
-                            <div class="front-content">
+                            <div class="front-content p-4">
                                 <p>Account: {{account.number}}</p>
                             </div>
                             <div class="content">
@@ -92,7 +93,8 @@
                 <table class="table table-bordered table-striped border border-danger">
                     <section class="d-flex justify-content-center gap-3 my-5">
                         <h2 class="text-center">Loans Resume:</h2>
-                        <button id="button-loan" class="px-3"><a href="./loans-application.html" id="a-loan">Apply Loan</a></button>
+                        <button id="button-loan" class="px-3"><a href="./loans-application.html" id="a-loan">Apply
+                                Loan</a></button>
                     </section>
                     <thead>
                         <tr>
@@ -117,6 +119,10 @@
                     </tbody>
                 </table>
             </div>
+
+                <img src="../images/banner_2.png" alt="banner_2" class="rounded-3 my-3">
+                <img src="../images/banner_1.png" alt="banner_1" class="rounded-4 ">
+            
         </main>
 
         <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center">
