@@ -31,15 +31,34 @@ const options = {
         lastName: this.lastName,
         email: this.email,
       };
-      axios
-        .post("http://localhost:8080/api/clients", newClient)
-        .then((answer) => {
-          (this.firstName = ""),
-            (this.lastName = ""),
-            (this.email = ""),
-            this.loadData();
-        })
-        .catch((error) => console.log(error));
+      Swal.fire({
+        title: "Do you want to add a new client?",
+        inputAttributes:{
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Add client',
+        showLoaderOnConfirm: true,
+        buttonColor: '#3085d6',
+      
+        preConfirm: login =>{
+            return  axios
+            .post("http://localhost:8080/api/clients", newClient)
+            .then((answer) => {
+                (this.firstName = ""),
+                    (this.lastName = ""),
+                    (this.email = ""),
+                    this.loadData();
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    text:error.response.data,
+                    confirmButtonColor: '#3085d6'
+                });
+            });
+        }
+      }) 
     },
     voidInput() {
       if (this.firstName && this.lastName && this.email) {
@@ -73,4 +92,5 @@ switchButton.addEventListener("click", e => {
   form.classList.toggle("dark-form");
   button.classList.toggle("dark-button");
 });
+
 

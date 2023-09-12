@@ -8,6 +8,9 @@
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="../style/accounts.css">
   <link rel="shortcut icon" href="../images/Mindhub Brothers-logos_transparent.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap" rel="stylesheet">
   <title>Account | Brothers Mindhub</title>
 </head>
 
@@ -26,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav ms-auto gap-3">
             <li class="nav-item">
-              <a class="nav-link active" href="#">ACCOUNTS
+              <a class="nav-link active" href="./accounts.html">ACCOUNTS
                 <span class="visually-hidden">(current)</span>
               </a>
             </li>
@@ -40,72 +43,84 @@
               <a class="nav-link" href="./transfers.html">TRANSACTION</a>
             </li>
             <li class="nav-item">
-              <button class="button" @click.prevent="logOut">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
-                  </path>
-                </svg>
-                <div class="text">
-                  Log out
-                </div>
-
+              <button type="button" class="rounded-4 px-3" id="bg-dark">
+                  DARK MODE
               </button>
-            </li>
+          </li>
+          <li class="nav-item">
+              <button class="button" @click.prevent="logOut">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                      stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                  </svg>
+                  <div class="text">Log out</div>
+              </button>
+          </li>
           </ul>
         </div>
       </div>
     </nav>
 
     <header>
-      <h1 class=" text-light text-center">Welcome to your account</h1>
+      <h1 class=" text-light text-center p-2">Welcome to your account</h1>
     </header>
 
-    <main class="d-flex justify-content-evenly align-items-center flex-wrap">
-      <div class="d-flex flex-wrap">
-        <div class="card-container">
-          <div class="card">
-            <div class="front-content">
-              <p>Account:{{account.number}}</p>
-            </div>
-            <div class="content">
-              <h5>Balance: {{account.balance}} </h5>
-              <h5>Creation Date:{{account.creationDate}}</h5>
+    <main class=" my-5 d-flex flex-column align-items-center ">
+      <div class="d-flex justify-content-evenly align-items-center flex-wrap col-12 gap-3">
+        <div class="d-flex flex-wrap">
+          <div class="card-container">
+            <div class="card">
+              <div class="front-content p-4">
+                <p>Account:{{account.number}}</p>
+              </div>
+              <div class="content">
+                <h5>Balance: {{account.balance}} </h5>
+                <h5>Creation Date:{{account.creationDate}}</h5>
+              </div>
             </div>
           </div>
+
         </div>
 
+        <div class=" table-responsive mt-2 d-flex flex-column justify-content-center align-items-center mx-2">
+          <table class="table table-bordered table-striped border border-danger ">
+            <caption>Transaction Resume</caption>
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <template v-if="transaction.length > 0" v-for="transfer of transaction">
+                <tr>
+                  <td :class="transfer.type == 'DEBIT' ? 'text-danger' : 'text-success' "> {{transfer.type}} </td>
+                  <td> {{transfer.amount}} </td>
+                  <td> {{transfer.date}} </td>
+                  <td> {{transfer.description}} </td>
+                </tr>
+              </template>
+              <tr v-else>
+                <td>0</td>
+                <td>No show Data</td>
+                <td>No show Data</td>
+                <td>No show Data</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div class=" table-responsive mt-2 d-flex flex-column justify-content-center align-items-center w-50">
-        <table class="table table-bordered table-striped border border-danger ">
-          <caption>Transaction Resume</caption>
-          <thead>
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Date</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <template v-if="transaction.length > 0" v-for="transfer of transaction">
-              <tr>
-                <td :class="transfer.type == 'DEBIT' ? 'text-danger' : 'text-success' "> {{transfer.type}} </td>
-                <td> {{transfer.amount}} </td>
-                <td> {{transfer.date}} </td>
-                <td> {{transfer.description}} </td>
-              </tr>
-            </template>
-            <tr v-else>
-              <td>0</td>
-              <td>No show Data</td>
-              <td>No show Data</td>
-              <td>No show Data</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-12 d-flex gap-5 justify-content-center flex-wrap mt-3">
+        <a href="#"><img src="../images/banner_1.1.png" alt="bn1" class="rounded-4"></a>
+        <a href="#"><img src="../images/banner_2.2.png" alt="bn2" class="rounded-4"></a>
+        <a href="#"><img src="../images/banner_1.3.png" alt="bn3" class="rounded-4"></a>
+        <a href="#"><img src="../images/banner_1.4.png" alt="bn4" class="rounded-4"></a>
+        <a href="#"><img src="../images/banner_1.5.png" alt="bn5" class="rounded-4"></a>
       </div>
     </main>
 

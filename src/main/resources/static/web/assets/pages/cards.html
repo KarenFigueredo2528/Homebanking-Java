@@ -7,6 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="shortcut icon" href="../images/Mindhub Brothers-logos_transparent.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../style/accounts.css">
     <title>Accounts | Brothers MindHub Bank</title>
 </head>
@@ -40,33 +46,35 @@
                             <a class="nav-link" href="./transfers.html">TRANSACTION</a>
                         </li>
                         <li class="nav-item">
-                            <button class="button" @click.prevent="logOut">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                                </svg>
-                                <div class="text">
-                                    Log out
-                                </div>
-
+                            <button type="button" class="rounded-4 px-3" id="bg-dark">
+                              DARK MODE
                             </button>
-                        </li>
+                          </li>
+                          <li class="nav-item">
+                            <button class="button" @click.prevent="logOut">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
+                                </path>
+                              </svg>
+                              <div class="text">Log out</div>
+                            </button>
+                          </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
         <header>
-            <h1 class=" text-light text-center">Welcome to your account </h1>
+            <h1 class=" text-light text-center p-2">Welcome to your account </h1>
         </header>
 
-        <main class=" d-flex justify-content-evenly flex-wrap container-fluid text-center my-2 align-items-center">
+        <main class=" d-flex justify-content-evenly flex-column flex-lg-row container-fluid text-center my-2 align-items-center">
             <section>
-                <h2>DEBIT CARD</h2>
+                <h2 class="fw-bold">DEBIT CARD</h2>
                 <template v-if="debits.length >0" v-for="(debit, index) of debits">
-                    <div class="flip-card my-5 d-flex align-items-center justify-content-center">
-                        <div class="flip-card-inner">
+                    <div class="flip-card my-2 d-flex align-items-center justify-content-center text-dark">
+                        <div class="flip-card-inner text-dark">
                             <div :class="{'flip-card-front  flip-card-front-gold flip-card-front':debit.color
                             == 'GOLD','flip-card-front-titanium flip-card-front':debit.color == 
                             'TITANIUM',' flip-card-front-silver  flip-card-front':debit.color == 'SILVER'}">
@@ -153,9 +161,9 @@
                 <h3 v-else> You don't have any debit cards to show</h3>
             </section>
             <section>
-                <h2>CREDIT CARD</h2>
+                <h2 class="fw-bold">CREDIT CARD</h2>
                 <template v-if="credits.length >0" v-for="(credit,index) of credits">
-                    <div class="flip-card my-5 d-flex align-items-center justify-content-center">
+                    <div class="flip-card my-2 d-flex align-items-center justify-content-center text-dark">
                         <div class="flip-card-inner">
                             <div :class="{'flip-card-front  flip-card-front-gold flip-card-front':credit.color
                             == 'GOLD','flip-card-front-titanium flip-card-front':credit.color == 

@@ -2,156 +2,164 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-    <link rel="shortcut icon" href="../images/Mindhub Brothers-logos_transparent.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../style/accounts.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet" />
-    <title>Accounts | MindHub Brothers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <link rel="shortcut icon" href="../images/Mindhub Brothers-logos_transparent.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../style/accounts.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap" rel="stylesheet" />
+  <title>Accounts | MindHub Brothers</title>
 </head>
 
 <body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark" id="bg-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="../images/Mindhub Brothers-logos.jpeg" alt="logo"
+            title="Logo Mindhub Brothers" class="logo-mb" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav ms-auto gap-3">
+            <li class="nav-item">
+              <a class="nav-link active fw-bold" href="#">ACCOUNTS
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./cards.html">CARDS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./loans-application.html">LOANS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./transfers.html">TRANSACTION</a>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="rounded-4 px-3" id="bg-dark">
+                DARK MODE
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="button" @click.prevent="logOut">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
+                  </path>
+                </svg>
+                <div class="text">Log out</div>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header>
+      <h1 class="text-light text-center p-2">
+        Welcome to your account {{clients.firstName}}
+      </h1>
+    </header>
 
-    <div id="app">
-        <nav class="navbar navbar-expand-lg" data-bs-theme="dark" id="bg-nav">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="../images/Mindhub Brothers-logos.jpeg" alt="logo"
-                        title="Logo Mindhub Brothers" class="logo-mb" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav ms-auto gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link active fw-bold" href="#">ACCOUNTS
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cards.html">CARDS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./loans-application.html">LOANS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./transfers.html">TRANSACTION</a>
-                        </li>
-                        <li class="nav-item">
-                            <button class="button" @click.prevent="logOut">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                                </svg>
-                                <div class="text">Log out</div>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+    <main
+      class="d-flex flex-column flex-lg-row py-3 container justify-content-around container align-items-center flex-wrap">
+      <img src="../images/animation_1.png" alt="animation_1" id="img-ani" class="col-sm-5 col-12 align-items-center" />
+      <div class="d-flex flex-column flex-md-row align-items-center gap-3 flex-wrap">
+        <template v-if="accounts.length > 0" v-for="account of accounts">
+          <div class="card-container d-flex flex-column align-items-center">
+            <div class="card">
+              <div class="front-content p-4">
+                <p>Account: {{account.number}}</p>
+              </div>
+              <div class="content">
+                <h2>Details</h2>
+                <h5>Balance: {{account.balance.toLocaleString(1)}}</h5>
+                <h5>Creation Date: {{account.creationDate}}</h5>
+              </div>
             </div>
-        </nav>
-        <header>
-            <h1 class="text-light text-center">
-                Welcome to your account {{clients.firstName}}
-            </h1>
-        </header>
+            <a :href="'./account.html?id='+account.id" class="btn text-center mt-2 text-light"
+              id="btn-transaction">Transaction History</a>
+          </div>
+        </template>
+        <template v-if="accounts.length < 3">
+          <button class="createAccount" @click="alert">
+            Create new account
+          </button>
+        </template>
+      </div>
 
-        <main
-            class="d-flex flex-column flex-lg-row py-3 container justify-content-around container align-items-center flex-wrap">
-            <img src="../images/animation_1.png" alt="animation_1" id="img-ani"
-                class="col-sm-5 col-12 align-items-center" />
-            <div class="d-flex flex-column flex-md-row align-items-center gap-3 flex-wrap">
-                <template v-if="accounts.length > 0" v-for="account of accounts">
-                    <div class="card-container d-flex flex-column align-items-center ">
-                        <div class="card">
-                            <div class="front-content p-4">
-                                <p>Account: {{account.number}}</p>
-                            </div>
-                            <div class="content">
-                                <h2>Details</h2>
-                                <h5>Balance: {{account.balance}}</h5>
-                                <h5>Creation Date: {{account.creationDate}}</h5>
-                            </div>
-                        </div>
-                        <a :href="'./account.html?id='+account.id" class="btn text-center mt-2 text-light"
-                            id="btn-transaction">Transaction History</a>
-                    </div>
-                </template>
-                <template v-if="accounts.length < 3">
-                    <button class="createAccount" @click="alert">
-                        Create new account
-                    </button>
-                </template>
-            </div>
+      <div class="mt-4 container">
+        <table class="table table-bordered table-striped border border-danger">
+          <section class="d-flex justify-content-center gap-3 my-5">
+            <h2 class="text-center">Loans Resume:</h2>
+            <button id="button-loan" class="px-3">
+              <a href="./loans-application.html" id="a-loan">Apply Loan</a>
+            </button>
+          </section>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Payment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-if="loans.length >0 " v-for="loan of loans">
+              <tr>
+                <td>{{loan.name}}</td>
+                <td>{{loan.amount.toLocaleString(1)}}</td>
+                <td>{{loan.payments}}</td>
+              </tr>
+            </template>
+            <tr v-else>
+              <td>0</td>
+              <td>No show Data</td>
+              <td>No show Data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-            <div class="mt-4 container">
-                <table class="table table-bordered table-striped border border-danger">
-                    <section class="d-flex justify-content-center gap-3 my-5">
-                        <h2 class="text-center">Loans Resume:</h2>
-                        <button id="button-loan" class="px-3"><a href="./loans-application.html" id="a-loan">Apply
-                                Loan</a></button>
-                    </section>
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="loans.length >0 " v-for="loan of loans">
-                            <tr>
-                                <td>{{loan.name}}</td>
-                                <td>{{loan.amount}}</td>
-                                <td>{{loan.payments}}</td>
-                            </tr>
-                        </template>
-                        <tr v-else>
-                            <td>0</td>
-                            <td>No show Data</td>
-                            <td>No show Data</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+      <div class="div-img col-12">
+        <img src="../images/banner_2.png" alt="banner_2" class="rounded-3 my-3 col-12" />
+        <img src="../images/banner_1.png" alt="banner_1" class="rounded-4 col-12" />
+      </div>
+    </main>
 
-                <img src="../images/banner_2.png" alt="banner_2" class="rounded-3 my-3">
-                <img src="../images/banner_1.png" alt="banner_1" class="rounded-4 ">
-            
-        </main>
+    <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center">
+      <p class="text-light">
+        © 2023 Mindhub Brother, Inc | All right reserve to Karen Buitrago
+      </p>
+      <nav class="d-flex gap-3 justify-content-center">
+        <a href="https://github.com/KarenBuitrago2825"><img src="../images/github-sign.png" alt="github"
+            title="GitHub Karen Buitrago" class="network-img" /></a>
+        <a href="https://web.whatsapp.com/"><img src="../images/whatsapp(1).png" alt="whatsapp" title="WhatsApp"
+            class="network-img" /></a>
+        <a href="https://www.instagram.com/"><img src="../images/instagram(1).png" alt="instagram" title="Instagram"
+            class="network-img" /></a>
+        <a href="https://es-la.facebook.com/"><img src="../images/facebook(1).png" alt="facebok" title="Facebook"
+            class="network-img" /></a>
+        <a href="mailto: mindhubrothers@gmail.com"><img src="../images/gmail.png" alt="mail" title="Mail"
+            class="network-img" /></a>
+        <a href="tel: 654456987"><img src="../images/customer-service.png" alt="call-center" title="Call Us"
+            class="network-img" /></a>
+      </nav>
+    </footer>
+  </div>
 
-        <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center">
-            <p class="text-light">
-                © 2023 Mindhub Brother, Inc | All right reserve to Karen Buitrago
-            </p>
-            <nav class="d-flex gap-3 justify-content-center">
-                <a href="https://github.com/KarenBuitrago2825"><img src="../images/github-sign.png" alt="github"
-                        title="GitHub Karen Buitrago" class="network-img" /></a>
-                <a href="https://web.whatsapp.com/"><img src="../images/whatsapp(1).png" alt="whatsapp" title="WhatsApp"
-                        class="network-img" /></a>
-                <a href="https://www.instagram.com/"><img src="../images/instagram(1).png" alt="instagram"
-                        title="Instagram" class="network-img" /></a>
-                <a href="https://es-la.facebook.com/"><img src="../images/facebook(1).png" alt="facebok"
-                        title="Facebook" class="network-img" /></a>
-                <a href="mailto: mindhubrothers@gmail.com"><img src="../images/gmail.png" alt="mail" title="Mail"
-                        class="network-img" /></a>
-                <a href="tel: 654456987"><img src="../images/customer-service.png" alt="call-center" title="Call Us"
-                        class="network-img" /></a>
-            </nav>
-        </footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="../scripts/accounts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="../scripts/accounts.js"></script>
 </body>
 
 </html>

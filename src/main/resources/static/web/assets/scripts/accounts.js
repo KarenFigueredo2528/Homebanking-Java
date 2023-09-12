@@ -17,10 +17,9 @@ const options = {
         .get("http://localhost:8080/api/clients/current")
         .then((answer) => {
           this.clients = answer.data;
-          console.log(this.client);
           this.loans = this.clients.loans;
           this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id);
-          console.log(this.loans);
+          console.log(this.accounts);
         })
         .catch((error) => console.log(error));
     },
@@ -50,3 +49,10 @@ const options = {
 };
 const app = createApp(options);
 app.mount("#app");
+
+/*Dark mode */
+const switchButton = document.querySelector("#bg-dark");
+const body = document.querySelector("body");
+switchButton.addEventListener("click", e => {
+  body.classList.toggle("dark-mode"); 
+});

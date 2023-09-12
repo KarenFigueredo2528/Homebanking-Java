@@ -35,3 +35,10 @@ const options ={
 
 const app = createApp(options);
 app.mount("#app")
+
+/*Dark mode */
+const switchButton = document.querySelector("#bg-dark");
+const body = document.querySelector("body");
+switchButton.addEventListener("click", e => {
+  body.classList.toggle("dark-mode"); 
+});
