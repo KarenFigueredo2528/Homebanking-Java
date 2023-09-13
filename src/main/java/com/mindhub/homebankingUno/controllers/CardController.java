@@ -47,7 +47,7 @@ public class CardController {
 		String cardNumber;
 		do {
 			cardNumber = NumerosAleatorios.CardNumber();
-		} while (cardService.findByNumber(cardNumber) != null);
+		} while (cardService.existByNumber(cardNumber));
 
 		int cardCvv = NumerosAleatorios.getCardCVV();
 

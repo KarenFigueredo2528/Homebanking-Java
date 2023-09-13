@@ -38,7 +38,7 @@ public class AccountController {
 		return accountService.getAccountsDTO();
 	}*/
 
-	@RequestMapping("/api/accounts/{id}")
+	@GetMapping("/api/accounts/{id}")
 	public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication) {
 		Client authClient = clientService.findByEmail(authentication.getName());
 		Account getAccount = accountService.findById(id);

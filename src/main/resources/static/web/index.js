@@ -9,7 +9,7 @@ const options = {
       lastName: "",
     };
   },
-  created() {},
+  created() { },
   methods: {
     login() {
       axios
@@ -27,11 +27,8 @@ const options = {
     },
     register(event) {
       event.preventDefault();
-      console.log("no te calentes martin");
-      axios
-        .post(
-          "/api/clients",
-          `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
+      console.log("si funciona... por lo menos entra");
+      axios.post("/api/clients",`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
           { headers: { "content-type": "application/x-www-form-urlencoded" } }
         )
         .then((response) => {
@@ -40,7 +37,7 @@ const options = {
         .catch((error) =>
           Swal.fire({
             title: "Error!",
-            text: error.message,
+            text: error.response.data,
             icon: "error",
             confirmButtonText: "Cool",
           })

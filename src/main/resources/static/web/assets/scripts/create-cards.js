@@ -16,10 +16,11 @@ const options = {
         console.log(this.color);
         console.log(this.type);
         axios.post('/api/clients/current/cards',`color=${this.color}&type=${this.type}`,{headers:{'content-type': 'application/x-www-form-urlencoded'}})
-          .then((response) => {
+          .then(response => {
+            console.log(response);
             location.href = "../pages/cards.html";
           }).catch((error) => {
-            window.alert("You have reached the card limit");         
+            window.alert("You have reached the card limit");    
           });
       }
     },

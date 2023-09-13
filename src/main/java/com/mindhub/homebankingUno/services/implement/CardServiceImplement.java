@@ -17,10 +17,15 @@ public class CardServiceImplement implements CardService {
 		cardRepository.save(card);
 	}
 
+	@Override
+	public Boolean existByNumber(String cardNumber) {
+		return cardRepository.existsByNumber(cardNumber);
+	}
+
 
 	/*Preguntar*/
 	@Override
-	public Boolean findByNumber(String cardNumber) {
-		return cardRepository.findByNumber(cardNumber) != null;
+	public Card findByNumber(String cardNumber) {
+		return cardRepository.findByNumber(cardNumber);
 	}
 }

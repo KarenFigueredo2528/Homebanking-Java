@@ -32,12 +32,12 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients() {
         return clientService.getClientsDTO();
     }
 
-    @RequestMapping("/clients/{current}")
+    @GetMapping("/clients/{current}")
     public ClientDTO getClient(Authentication authentication) {
         return clientService.getCurrentClient(authentication.getName());
     }
@@ -46,7 +46,7 @@ public class ClientController {
     private PasswordEncoder passwordEncoder;
 
 
-    @RequestMapping(path = "/clients", method = RequestMethod.POST)
+    @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
@@ -64,6 +64,7 @@ public class ClientController {
         Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(),0);
         client.addAccounts(newAccount);
         accountRepository.save(newAccount);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -4,5 +4,8 @@ import com.mindhub.homebankingUno.models.Card;
 
 public interface CardService {
 	void saveCard(Card card);
-	Boolean findByNumber(String cardNumber);
+
+	Boolean existByNumber(String cardNumber);
+
+	Card findByNumber(String cardNumber);
 }

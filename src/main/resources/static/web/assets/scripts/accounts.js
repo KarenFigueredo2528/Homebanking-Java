@@ -14,7 +14,7 @@ const options = {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current")
+        .get("http://localhost:8080/api/clients/current",{headers:{'accept':'application/xml'}})
         .then((answer) => {
           this.clients = answer.data;
           this.loans = this.clients.loans;

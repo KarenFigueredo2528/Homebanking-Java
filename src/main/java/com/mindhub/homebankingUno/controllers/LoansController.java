@@ -60,7 +60,7 @@ public class LoansController {
 	}
 
 	@Transactional
-	@RequestMapping(path = "/loans", method = RequestMethod.POST)
+	@PostMapping ("/loans")
 	public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication authentication) {
 
 		Client client = clientService.findByEmail(authentication.getName());
