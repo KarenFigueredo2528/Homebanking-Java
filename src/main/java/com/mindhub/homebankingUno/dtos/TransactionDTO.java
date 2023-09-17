@@ -11,6 +11,7 @@ public class TransactionDTO {
     private String description;
     private LocalDateTime date;
     private TransactionType type;
+    private double currentBalance;
 
     public TransactionDTO() {
     }
@@ -20,6 +21,7 @@ public class TransactionDTO {
         this.description = transfer.getDescription();
         this.date = transfer.getDate();
         this.type = transfer.getType();
+        this.currentBalance = transfer.getCurrentBalance();
 
     }
 
@@ -41,5 +43,9 @@ public class TransactionDTO {
 
     public TransactionType getType() {
         return type;
+    }
+
+    public double getCurrentBalance() {
+        return currentBalance;
     }
 }

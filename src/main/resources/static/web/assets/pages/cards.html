@@ -47,19 +47,20 @@
                         </li>
                         <li class="nav-item">
                             <button type="button" class="rounded-4 px-3" id="bg-dark">
-                              DARK MODE
+                                DARK MODE
                             </button>
-                          </li>
-                          <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <button class="button" @click.prevent="logOut">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
-                                </path>
-                              </svg>
-                              <div class="text">Log out</div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
+                                    </path>
+                                </svg>
+                                <div class="text">Log out</div>
                             </button>
-                          </li>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -69,7 +70,8 @@
             <h1 class=" text-light text-center p-2">Welcome to your account </h1>
         </header>
 
-        <main class=" d-flex justify-content-evenly flex-column flex-lg-row container-fluid text-center my-2 align-items-center">
+        <main
+            class=" d-flex justify-content-evenly flex-column flex-lg-row container-fluid text-center my-2 align-items-center">
             <section>
                 <h2 class="fw-bold">DEBIT CARD</h2>
                 <template v-if="debits.length >0" v-for="(debit, index) of debits">
@@ -142,7 +144,7 @@
                           OjU2KzAwOjAw0ssWdwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMi0xM1QwODoxOTo1Nisw
                           MDowMIXeN6gAAAAASUVORK5CYII="></image>
                                 </svg>
-                                <p class="number">{{debit.number}}</p>
+                                <p class="number" >{{debit.number}}</p>
                                 <p class="date_8264">{{fromDateDebit[index]}}</p>
 
                                 <p class="name">{{debit.cardHolder}}</p>
@@ -152,11 +154,13 @@
                                 <div class="mstrip"></div>
                                 <div class="sstrip">
                                     <p class="code">{{debit.cvv}}</p>
-                                    <p class="code text-light">{{thruDateDebit[index]}}</p>
+                                    <p class="codeDate text-light" :class="{'codeDate': thruDateCredit[index] > dateName, 'codeDateExpired': thruDateCredit[index] < dateName}">{{thruDateDebit[index]}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button class="deactivateCard btn btn-danger rounded-4" @click.prevent="deleteCard(debit.number)">Delete
+                        Card</button>
                 </template>
                 <h3 v-else> You don't have any debit cards to show</h3>
             </section>
@@ -241,15 +245,18 @@
                                 <div class="mstrip"></div>
                                 <div class="sstrip">
                                     <p class="code">{{credit.cvv}}</p>
-                                    <p class="code text-light">{{thruDateCredit[index]}}</p>
+                                    <p class="codeDate text-light" :class="{'codeDate': thruDateCredit[index] > dateName, 'codeDateExpired': thruDateCredit[index] < dateName}">{{thruDateCredit[index]}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button class="deactivateCard btn btn-danger rounded-4" @click.prevent="deleteCard(credit.number)">Delete
+                        Card</button>
                 </template>
                 <h3 v-else> You don't have any credit cards to show</h3>
             </section>
             <button class="createCard"><a href="./create-card.html">Create Card</a></button>
+
         </main>
 
         <footer class="d-flex flex-column justify-content-center align-items-center p-2 text-center ">
@@ -277,6 +284,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="../scripts/cards.js"></script>

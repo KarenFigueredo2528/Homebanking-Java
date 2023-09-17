@@ -109,10 +109,11 @@ public class LoansController {
 		clientLoanRepository.save(clientLoan);
 
 		String transactionStatus = loan.getName() + "Loan Approved";
-		Transaction transaction = new Transaction(loanApplicationDTO.getAmount(),transactionStatus, LocalDateTime.now(), TransactionType.CREDIT);
-		transactionRepository.save(transaction);
 
 		account.setBalance(account.getBalance()+ loanApplicationDTO.getAmount());
+		Transaction transaction = new Transaction(loanApplicationDTO.getAmount(),transactionStatus, LocalDateTime.now(), TransactionType.CREDIT, account.getBalance());
+		transactionRepository.save(transaction);
+
 		accountService.saveAccount(account);
 		account.addTransfer(transaction);
 		clientService.saveClient(client);

@@ -15,6 +15,7 @@ public class CardDTO {
     private int cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
+    private Boolean cardStatus;
 
     public CardDTO() {
     }
@@ -27,6 +28,7 @@ public class CardDTO {
         this.cvv = card.getCvv();
         this.thruDate = card.getThruDate();
         this.fromDate = card.getFromDate();
+        this.cardStatus = card.getCardStatus();
     }
 
     public String getCardHolder() {
@@ -55,5 +57,9 @@ public class CardDTO {
 
     public CardColor getColor() {
         return color;
+    }
+
+    public Boolean getCardStatus() {
+        return cardStatus;
     }
 }

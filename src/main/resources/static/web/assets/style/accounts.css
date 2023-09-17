@@ -254,6 +254,20 @@ main {
   color: rgb(0, 0, 0);
 }
 
+.codeDate {
+  font-weight: bold;
+  text-align: center;
+  margin: -0.3em;
+  color: rgb(0, 0, 0);
+}
+
+.codeDateExpired {
+  font-weight: bold;
+  text-align: center;
+  margin: -0.3em;
+  color: rgb(228, 10, 10) !important;
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;

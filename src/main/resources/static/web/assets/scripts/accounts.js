@@ -14,9 +14,10 @@ const options = {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current",{headers:{'accept':'application/xml'}})
+        .get("http://localhost:8080/api/clients/current", { headers: { 'accept': 'application/json' } })
         .then((answer) => {
           this.clients = answer.data;
+          console.log(answer);
           this.loans = this.clients.loans;
           this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id);
           console.log(this.accounts);
@@ -54,5 +55,5 @@ app.mount("#app");
 const switchButton = document.querySelector("#bg-dark");
 const body = document.querySelector("body");
 switchButton.addEventListener("click", e => {
-  body.classList.toggle("dark-mode"); 
+  body.classList.toggle("dark-mode");
 });

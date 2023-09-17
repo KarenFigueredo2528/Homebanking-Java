@@ -92,10 +92,10 @@ public class TransactionsController {
 			accOrigin.setBalance(accOrigin.getBalance() - amount);
 			accDestination.setBalance(accDestination.getBalance() + amount);
 
-			Transaction transfer1 = new Transaction(amount, description + " " + accOrigin.getNumber(), LocalDateTime.now(), TransactionType.DEBIT);
+			Transaction transfer1 = new Transaction(amount, description + " " + accOrigin.getNumber(), LocalDateTime.now(), TransactionType.DEBIT, accOrigin.getBalance());
 			accOrigin.addTransfer(transfer1);
 			transactionService.saveTransaction(transfer1);
-			Transaction transfer2 = new Transaction(amount, description+" "+ accDestination.getNumber(), LocalDateTime.now(), TransactionType.CREDIT);
+			Transaction transfer2 = new Transaction(amount, description+" "+ accDestination.getNumber(), LocalDateTime.now(), TransactionType.CREDIT, accDestination.getBalance());
 			accDestination.addTransfer(transfer2);
 			transactionService.saveTransaction(transfer2);
 

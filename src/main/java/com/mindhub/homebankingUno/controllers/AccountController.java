@@ -33,11 +33,6 @@ public class AccountController {
 	@Autowired
 	private ClientService clientService;
 
-	/*@RequestMapping("/api/accounts")
-	public List<AccountDTO> getAccounts() {
-		return accountService.getAccountsDTO();
-	}*/
-
 	@GetMapping("/api/accounts/{id}")
 	public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication) {
 		Client authClient = clientService.findByEmail(authentication.getName());

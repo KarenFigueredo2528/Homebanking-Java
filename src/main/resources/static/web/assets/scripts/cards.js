@@ -9,7 +9,9 @@ const options = {
             fromDateDebit: [],
             thruDateDebit: [],
             fromDateCredit: [],
-            thruDateCredit: []
+            thruDateCredit: [],
+            cardNumber : "",
+            dateName : new Date().toISOString().slice(2, 7),
         }
     }, created() {
         this.loadData()
@@ -18,7 +20,10 @@ const options = {
         loadData() {
             axios.get(`http://localhost:8080/api/clients/current`)
                 .then(answer => {
-                    this.cards = answer.data.cards
+                    console.log(this.dateName);
+                    const card = answer.data.cards
+                    console.log(card);
+                    this.cards = card.filter(card => card.cardStatus == true)
 
                     this.credits = this.cards.filter(card => card.type == "CREDIT")
                     this.debits = this.cards.filter(card => card.type == "DEBIT")
@@ -32,6 +37,34 @@ const options = {
                     console.log(this.thruDateCredit);
                 }).catch(error => console.log("error"))
         },
+
+        deleteCard(number){
+            Swal.fire({
+                title: 'Do you want to delete this card?',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                showLoaderOnConfirm: true,
+                buttonColor: '#3085d6',
+                preConfirm: login => {
+                    return axios.patch("http://localhost:8080/api/clients/current/cards", `cardNumber=${number}`)
+                        .then(answer => {
+                            location.reload()
+                        }).catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text:error.response.data,
+                                confirmButtonColor: '#3085d6'
+
+                            });
+                        })
+                },
+                alloweOutside:()=> !Swal.isLoading()
+            })
+        },
+
         logOut(){
             axios.post("/api/logout")
             .then(response =>{

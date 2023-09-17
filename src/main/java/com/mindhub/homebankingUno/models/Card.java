@@ -21,6 +21,7 @@ public class Card {
     private int cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
+    private Boolean cardStatus;
 
     //Relation
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,7 +32,7 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardHolder, CardType cardType, CardColor cardColor,String number, int cvv, LocalDate thruDate, LocalDate fromDate) {
+    public Card(String cardHolder, CardType cardType, CardColor cardColor,String number, int cvv, LocalDate thruDate, LocalDate fromDate, Boolean cardStatus) {
         this.cardHolder = cardHolder;
         this.type = cardType;
         this.color= cardColor;
@@ -39,6 +40,7 @@ public class Card {
         this.cvv = cvv;
         this.thruDate = thruDate;
         this.fromDate = fromDate;
+        this.cardStatus = cardStatus;
     }
 
 
@@ -113,5 +115,13 @@ public class Card {
 
     public Client getClient() {
         return client;
+    }
+
+    public Boolean getCardStatus() {
+        return cardStatus;
+    }
+
+    public void setCardStatus(Boolean cardStatus) {
+        this.cardStatus = cardStatus;
     }
 }

@@ -25,7 +25,7 @@ const options = {
       this.form2 = true;
     },
     loadData() {
-      axios.get("http://localhost:8080/api/accounts")
+      axios.get("http://localhost:8080/api/clients/current/accounts")
         .then((answer) => {
         this.accounts = answer.data;
         console.log(this.accounts);

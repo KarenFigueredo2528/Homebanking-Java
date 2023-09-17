@@ -37,7 +37,7 @@
               <a class="nav-link" href="./cards.html">CARDS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">LOANS</a>
+              <a class="nav-link" href="./loans-application.html">LOANS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./transfers.html">TRANSACTION</a>
@@ -92,6 +92,7 @@
                 <th scope="col">Amount</th>
                 <th scope="col">Date</th>
                 <th scope="col">Description</th>
+                <th scope="col">Current Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -102,6 +103,7 @@
                   <td> {{transfer.amount}} </td>
                   <td> {{transfer.date}} </td>
                   <td> {{transfer.description}} </td>
+                  <td>{{transfer.currentBalance}}</td>
                 </tr>
               </template>
               <tr v-else>
@@ -109,7 +111,7 @@
                 <td>No show Data</td>
                 <td>No show Data</td>
                 <td>No show Data</td>
-              </tr>
+              </tr>           
             </tbody>
           </table>
         </div>
