@@ -154,7 +154,7 @@
                                 <div class="mstrip"></div>
                                 <div class="sstrip">
                                     <p class="code">{{debit.cvv}}</p>
-                                    <p class="codeDate text-light" :class="{'codeDate': thruDateCredit[index] > dateName, 'codeDateExpired': thruDateCredit[index] < dateName}">{{thruDateDebit[index]}}</p>
+                                    <p :class="{'codeDate': thruDateDebit[index] > dateName, 'codeDateExpired': thruDateDebit[index] < dateName}">{{thruDateDebit[index]}}</p>
                                 </div>
                             </div>
                         </div>

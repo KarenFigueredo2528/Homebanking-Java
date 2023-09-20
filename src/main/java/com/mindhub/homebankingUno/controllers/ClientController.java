@@ -24,9 +24,6 @@ import static java.util.stream.Collectors.toList;
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
@@ -50,25 +47,22 @@ public class ClientController {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
+
         if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
-
-        if (clientRepository.findByEmail(email) != null) {
+        if (clientService.findByEmail(email) != null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
         Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientService.saveClient(client);
-        int numberAccount = NumerosAleatorios.getRandomNumber(100000,10000000);
-        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(),0);
+        int numberAccount = NumerosAleatorios.getRandomNumber(100000, 10000000);
+        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(), 0, true);
         client.addAccounts(newAccount);
         accountRepository.save(newAccount);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
-
 }
 

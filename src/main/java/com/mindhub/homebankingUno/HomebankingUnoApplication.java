@@ -28,7 +28,7 @@ public class HomebankingUnoApplication {
         SpringApplication.run(HomebankingUnoApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
                                       TransactionRepository transactionRepository, LoanRepository loanRepository,
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
@@ -37,9 +37,8 @@ public class HomebankingUnoApplication {
             Client client = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("123456"));
             Client client2 = new Client("admin", "admin", "admin@admin.com", passwordEncoder.encode("456789"));
 
-            Account account1 = new Account("VIN001", this.currentDate, 5000);
-            Account account2 = new Account("VIN002", this.tomorrowDate, 7500);
-            Account account3 = new Account("VIN003", this.currentDate, 5600);
+            Account account1 = new Account("VIN001", this.currentDate, 5000,true);
+            Account account2 = new Account("VIN002", this.tomorrowDate, 7500,true);
 
             Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT, account1.getBalance() + 2500);
             Transaction transfer2 = new Transaction(-500, "Keyboard", this.dataTransfer, TransactionType.DEBIT, account1.getBalance() - 500);
@@ -59,7 +58,6 @@ public class HomebankingUnoApplication {
 
             client.addAccounts(account1);
             client.addAccounts(account2);
-            client2.addAccounts(account3);
 
             account1.addTransfer(transfer1);
             account1.addTransfer(transfer2);
@@ -80,7 +78,6 @@ public class HomebankingUnoApplication {
 
             accountRepository.save(account1);
             accountRepository.save(account2);
-            accountRepository.save(account3);
 
             transactionRepository.save(transfer1);
             transactionRepository.save(transfer2);
@@ -98,7 +95,7 @@ public class HomebankingUnoApplication {
             cardRepository.save(silver);
 
         };
-    }
+    }*/
 }
 
 

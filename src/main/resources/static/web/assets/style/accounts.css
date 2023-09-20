@@ -251,14 +251,14 @@ main {
   font-weight: bold;
   text-align: center;
   margin: -0.3em;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 .codeDate {
   font-weight: bold;
   text-align: center;
   margin: -0.3em;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 .codeDateExpired {

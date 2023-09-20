@@ -36,6 +36,7 @@ public class Client {
     public Client(){
     }
 
+    //Constructor method
     public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;

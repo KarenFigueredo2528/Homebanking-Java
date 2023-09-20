@@ -20,6 +20,7 @@ public class Account {
     private String number;
     private LocalDate creationDate;
     private double balance;
+    private Boolean accountStatus;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -31,10 +32,11 @@ public class Account {
     public Account() {
     }
 
-    public Account(String number, LocalDate currentDate, long balance) {
+    public Account(String number, LocalDate currentDate, long balance, Boolean accountStatus) {
         this.number = number;
         this.creationDate = currentDate;
         this.balance = balance;
+        this.accountStatus = accountStatus;
     }
 
     public long getId() {
@@ -92,4 +94,11 @@ public class Account {
         this.transfer = transfer;
     }
 
+    public Boolean getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(Boolean accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }

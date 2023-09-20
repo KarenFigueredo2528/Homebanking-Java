@@ -39,7 +39,7 @@ public class ClientDTO {
                 .collect(Collectors.toSet());
     }
 
-    //Accessor methods (getters and setters)
+    //Accessor methods (getters)
     public long getId() {
         return id;
     }
@@ -55,12 +55,8 @@ public class ClientDTO {
     public Set<AccountDTO> getAccounts() {
         return accounts;
     }
-    /*public void setAccounts(Set<AccountDTO> accounts) {
-        this.accounts = accounts;
-    }*/
     public Set<ClientLoadDTO> getLoans() {
         return loans;
     }
-
     public Set<CardDTO> getCards(){return cards;}
 }

@@ -51,7 +51,7 @@ public class AccountController {
 
 		if (authClient.getAccounts().size() < 3) {
 			int numRandom = NumerosAleatorios.getRandomNumber(100000, 10000000);
-			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0);
+			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0, true);
 			authClient.addAccounts(newAccount);
 			accountService.saveAccount(newAccount);
 		} else {
@@ -63,6 +63,34 @@ public class AccountController {
 	@GetMapping("/api/clients/current/accounts")
 	public List<AccountDTO> getAccounts(){
 		return accountService.getAccountsDTO();
+	}
+
+	@PatchMapping("/api/clients/current/accounts")
+	public ResponseEntity<Object>accountStatus(String numberAccount, Authentication authentication){
+		Client client = clientService.findByEmail(authentication.getName());
+
+		if(numberAccount.isBlank()){
+			return new ResponseEntity<>("Please enter number account", HttpStatus.FORBIDDEN);
+		}
+
+		Account account = repoAccount.findByNumber(numberAccount);
+
+		if(account == null){
+			return new ResponseEntity<>("The account was not found", HttpStatus.FORBIDDEN);
+		}
+
+		if(!client.getAccounts().contains(account)){
+			return new ResponseEntity<>("The account does not exist", HttpStatus.FORBIDDEN);
+		}
+
+		if(account.getAccountStatus()==false){
+			return new ResponseEntity<>("You already delete the account", HttpStatus.FORBIDDEN);
+		}
+
+		account.setAccountStatus(false);
+		accountService.saveAccount(account);
+		return new ResponseEntity<>("The account was delete", HttpStatus.OK);
+
 	}
 
 }

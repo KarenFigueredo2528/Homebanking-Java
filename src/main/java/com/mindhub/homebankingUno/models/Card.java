@@ -32,10 +32,10 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardHolder, CardType cardType, CardColor cardColor,String number, int cvv, LocalDate thruDate, LocalDate fromDate, Boolean cardStatus) {
+    public Card(String cardHolder, CardType cardType, CardColor cardColor, String number, int cvv, LocalDate fromDate, LocalDate thruDate, Boolean cardStatus) {
         this.cardHolder = cardHolder;
         this.type = cardType;
-        this.color= cardColor;
+        this.color = cardColor;
         this.number = number;
         this.cvv = cvv;
         this.thruDate = thruDate;
@@ -93,6 +93,7 @@ public class Card {
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
+
     public void setClient(Client client) {
         this.client = client;
     }

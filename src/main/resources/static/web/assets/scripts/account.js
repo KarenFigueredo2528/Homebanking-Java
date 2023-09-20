@@ -23,6 +23,32 @@ const options ={
                 console.log(this.transaction);
             }).catch(error=>console.log("error"));
         },
+        deleteAccount(number){
+            Swal.fire({
+                title: 'Do you want to delete this account?',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                showLoaderOnConfirm: true,
+                buttonColor: '#3085d6',
+                preConfirm: login => {
+                    return axios.patch("http://localhost:8080/api/clients/current/accounts", `numberAccount=${number}`)
+                        .then(answer => {
+                            location.reload()
+                        }).catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                text:error.response.data,
+                                confirmButtonColor: '#3085d6'
+
+                            });
+                        })
+                },
+                alloweOutside:()=> !Swal.isLoading()
+            })
+        },
         logOut(){
             axios.post("/api/logout")
             .then(response =>{

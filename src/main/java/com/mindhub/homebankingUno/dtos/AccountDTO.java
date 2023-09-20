@@ -13,6 +13,7 @@ public class AccountDTO {
     private LocalDate creationDate;
     private double balance;
     private Set<TransactionDTO> transactions = new HashSet<>();
+    private Boolean accountStatus;
 
     public AccountDTO() {
     }
@@ -26,6 +27,7 @@ public class AccountDTO {
         for(Transaction transfer: acc.getTransfer()){
             this.transactions.add(new TransactionDTO(transfer));
         };
+        this.accountStatus = acc.getAccountStatus();
     }
 
     public long getId() {
@@ -48,5 +50,9 @@ public class AccountDTO {
 
     public Set<TransactionDTO> getTransactions() {
         return transactions;
+    }
+
+    public Boolean getAccountStatus() {
+        return accountStatus;
     }
 }

@@ -91,7 +91,7 @@ public class CardController {
 		}
 
 		if(card.getCardStatus() == false){
-			return new ResponseEntity<>("You already deactivate the card",HttpStatus.FORBIDDEN);
+			return new ResponseEntity<>("You already delete the card",HttpStatus.FORBIDDEN);
 		}
 
 		card.setCardStatus(false);

@@ -34,7 +34,7 @@ const options = {
 
                     this.fromDateCredit = this.credits.map(date => date.fromDate.slice(2, 7))
                     this.thruDateCredit = this.credits.map(date => date.thruDate.slice(2, 7))
-                    console.log(this.thruDateCredit);
+                    console.log(this.thruDateDebit);
                 }).catch(error => console.log("error"))
         },
 
