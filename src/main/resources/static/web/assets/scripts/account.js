@@ -37,12 +37,13 @@ const options ={
                     return axios.patch("http://localhost:8080/api/clients/current/accounts", `numberAccount=${number}`)
                         .then(answer => {
                             location.reload()
+                            location.href = "./accounts.html"
                         }).catch(error => {
                             Swal.fire({
                                 icon: 'error',
                                 text:error.response.data,
                                 confirmButtonColor: '#3085d6'
-
+      
                             });
                         })
                 },

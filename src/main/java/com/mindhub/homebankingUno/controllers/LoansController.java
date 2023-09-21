@@ -103,7 +103,9 @@ public class LoansController {
 			return new ResponseEntity<>("The client already has this loan", HttpStatus.FORBIDDEN);
 		}
 
-		ClientLoan clientLoan = new ClientLoan (loanApplicationDTO.getAmount() * 1.2, loanApplicationDTO.getPayments());
+
+
+		ClientLoan clientLoan = new ClientLoan (loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount()*loan.getPercentage()/100), loanApplicationDTO.getPayments());
 		clientLoan.setClient(client);
 		clientLoan.setLoan(loan);
 		clientLoanRepository.save(clientLoan);

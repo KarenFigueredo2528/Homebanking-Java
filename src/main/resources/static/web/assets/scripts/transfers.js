@@ -4,7 +4,7 @@ const options = {
   data() {
     return {
       accounts: [],
-      description:"",
+      description: "",
       amount: 0,
       originAccount: "",
       destinationAccount: "",
@@ -27,19 +27,38 @@ const options = {
     loadData() {
       axios.get("http://localhost:8080/api/clients/current/accounts")
         .then((answer) => {
-        this.accounts = answer.data;
-        console.log(this.accounts);
-      });
+          const account = answer.data
+          this.accounts = account.filter(account => account.accountStatus == true);
+          console.log(this.accounts);
+        });
     },
-    transfer(){
-        axios.post("http://localhost:8080/api/transactions",`amount=${this.amount}&description=${this.description}&originAccount=${this.originAccount}&finalAccount=${this.destinationAccount}`)
-        .then(answer => {
-            alert("Transfer Succesful")
-            window.location.reload()
-        }).catch((error => 
-            alert(error.response.data)
-            ));   
-    }
+    transfer() {
+      Swal.fire({
+        title: 'Add a new loan?',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        buttonColor: '#3085d6',
+        preConfirm: login => {
+          return axios.post("http://localhost:8080/api/transactions", `amount=${this.amount}&description=${this.description}&originAccount=${this.originAccount}&finalAccount=${this.destinationAccount}`)
+            .then(answer => {
+              alert("Transfer Succesful")
+              location.reload()
+            }).catch(error => {
+              Swal.fire({
+                icon: 'error',
+                text: error.response.data,
+                confirmButtonColor: '#3085d6'
+
+              });
+            })
+        },
+        alloweOutside: () => !Swal.isLoading()
+      })
+    },
   },
 };
 

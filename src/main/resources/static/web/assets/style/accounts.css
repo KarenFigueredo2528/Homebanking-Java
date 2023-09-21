@@ -368,7 +368,7 @@ main {
   min-height: 50vh;
 }
 #main-cards {
-  background-color: #024f79;
+  background-color: #0a5075;
 }
 
 #button-loan {
@@ -389,7 +389,7 @@ main {
 }
 
 #form-loans {
-  background-color: #003049;
+  background-color: #0a5075;
 }
 
 @media screen and (max-width: 1024px) {
@@ -414,6 +414,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   color: white;
 }
 
-h1,h2,h3{
+h1,h2,h3, legend, option, label{
   font-family: 'Lora', serif;
 }

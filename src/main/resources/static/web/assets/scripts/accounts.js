@@ -6,6 +6,7 @@ const options = {
       clients: [],
       accounts: [],
       loans: [],
+      numberAccount: ""
     };
   },
   created() {
@@ -19,7 +20,7 @@ const options = {
           this.clients = answer.data;
           console.log(answer);
           this.loans = this.clients.loans;
-          this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id);
+          this.accounts = this.clients.accounts.sort((a, b) => a.id - b.id).filter(account => account.accountStatus)
           console.log(this.accounts);
         })
         .catch((error) => console.log(error));
@@ -32,19 +33,32 @@ const options = {
         })
         .catch((error) => console.log(error.message));
     },
-    alert() {
-      let mensaje;
-      let opcion = confirm("Do you want to create a new account?");
-      if (opcion == true) {
-        axios
-          .post("http://localhost:8080/api/clients/current/accounts")
-          .then((response) => {
-            location.href = "./accounts.html";
-          })
-          .catch((error) => {
-            window.alert("You have reached the account limit");
-          });
-      }
+    createAccount() {
+      Swal.fire({
+        title: 'Do you want to create a new account?',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        buttonColor: '#3085d6',
+        preConfirm: login => {
+          return axios.post("http://localhost:8080/api/clients/current/accounts")
+            .then(answer => {
+              location.reload()
+              location.href = "./accounts.html"
+            }).catch(error => {
+              Swal.fire({
+                icon: 'error',
+                text: error.response.data,
+                confirmButtonColor: '#3085d6'
+
+              });
+            })
+        },
+        alloweOutside: () => !Swal.isLoading()
+      })
     },
   },
 };

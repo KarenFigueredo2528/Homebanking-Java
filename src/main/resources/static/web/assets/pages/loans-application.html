@@ -67,7 +67,7 @@
 
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="selectbasic">Select Loan</label>
+                        <label class="col-md-6 control-label" for="selectbasic">Select Loan</label>
                         <div class="col-md-12">
                             <select id="selectbasic" name="selectbasic" class="form-control"
                                 @change="filterLoansPayments" v-model="selectedLoan">
@@ -80,7 +80,7 @@
 
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="selectbasic">Origin Account</label>
+                        <label class="col-md-6 control-label" for="selectbasic">Origin Account</label>
                         <div class="col-md-12">
                             <select id="selectbasic" name="selectbasic" class="form-control" v-model="originAccount">
                                 <template v-for="account in accounts">
@@ -92,7 +92,7 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="amount">Amount</label>
+                        <label class="col-md-6 control-label" for="amount">Amount</label>
                         <div class="col-md-12">
                             <input id="amount" name="amount" type="text" placeholder="$$$" class="form-control input-md"
                                 required="" v-model="amount" />
@@ -101,7 +101,7 @@
 
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="payments">Payments</label>
+                        <label class="col-md-6 control-label" for="payments">Payments</label>
                         <div class="col-md-12">
                             <select id="payments" name="payments" class="form-control" v-model="payments">
                                 <template v-for="payment in filterPayments.payments">
@@ -109,9 +109,12 @@
                                 </template>
                             </select>
                         </div>
+                        <template v-if="percentage.toString().length > 0">
+                            <span>Percentage Interests {{percentage}}%</span>
+                        </template>
                     </div>
-
-                    <button type="submit" @click.prevent="sendLoan"  @click.prevent="logOut" class="btn btn-success my-3 texte-center">Send loan</button>
+                    <button type="submit" @click.prevent="sendLoan" @click.prevent="logOut"
+                        class="btn btn-success my-3 texte-center">Send loan</button>
                 </fieldset>
             </form>
         </main>

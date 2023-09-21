@@ -46,7 +46,7 @@ public class ClientController {
     @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
-            @RequestParam String email, @RequestParam String password) {
+            @RequestParam String email, @RequestParam String password, @RequestParam String type) {
 
         if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
@@ -58,7 +58,7 @@ public class ClientController {
         Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientService.saveClient(client);
         int numberAccount = NumerosAleatorios.getRandomNumber(100000, 10000000);
-        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(), 0, true);
+        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(), 0, true, type);
         client.addAccounts(newAccount);
         accountRepository.save(newAccount);
 

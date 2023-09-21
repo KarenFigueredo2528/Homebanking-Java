@@ -14,6 +14,7 @@ public class AccountDTO {
     private double balance;
     private Set<TransactionDTO> transactions = new HashSet<>();
     private Boolean accountStatus;
+    private String typeAccount;
 
     public AccountDTO() {
     }
@@ -28,6 +29,7 @@ public class AccountDTO {
             this.transactions.add(new TransactionDTO(transfer));
         };
         this.accountStatus = acc.getAccountStatus();
+        this.typeAccount = acc.getTypeAccount();
     }
 
     public long getId() {
@@ -54,5 +56,9 @@ public class AccountDTO {
 
     public Boolean getAccountStatus() {
         return accountStatus;
+    }
+
+    public String getTypeAccount() {
+        return typeAccount;
     }
 }

@@ -9,7 +9,8 @@ const options = {
             payments: null,
             accounts: [],
             filterPayments: [],
-            selectedLoan: ""
+            selectedLoan: "",
+            percentage: ""
 
         }
     },
@@ -22,6 +23,7 @@ const options = {
             axios.get("http://localhost:8080/api/clients/current/accounts")
                 .then(answer => {
                     this.accounts = answer.data
+                    console.log(this.accounts);
                 }).catch(error => {
                     console.log(error);
                 })
@@ -31,6 +33,7 @@ const options = {
                 .then(answer => {
                     this.loans = answer.data
                     console.log(this.loans);
+
                 }).catch(error => {
                     console.log(error);
                 })
@@ -39,6 +42,8 @@ const options = {
             this.filterPayments = this.loans.filter((loan) => {
                 return this.selectedLoan == loan.id
             })[0]
+            this.percentage = this.filterPayments.percentage
+            console.log(this.percentage);
         },
         sendLoan() {
             const loanDetails = {
@@ -64,22 +69,23 @@ const options = {
                         }).catch(error => {
                             Swal.fire({
                                 icon: 'error',
-                                text:error.response.data,
+                                text: error.response.data,
                                 confirmButtonColor: '#3085d6'
 
                             });
                         })
                 },
-                alloweOutside:()=> !Swal.isLoading()
+                alloweOutside: () => !Swal.isLoading()
             })
         },
-        logOut(){
+        logOut() {
             axios.post("/api/logout")
-            .then(response =>{
-                location.href = "../../index.html"
-            })
-            .catch(error=> console.log(error.message))
-        }
+                .then(response => {
+                    location.href = "../../index.html"
+                })
+                .catch(error => console.log(error.message))
+        },
+
     }
 
 }

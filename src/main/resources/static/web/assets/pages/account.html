@@ -44,19 +44,19 @@
             </li>
             <li class="nav-item">
               <button type="button" class="rounded-4 px-3" id="bg-dark">
-                  DARK MODE
+                DARK MODE
               </button>
-          </li>
-          <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <button class="button" @click.prevent="logOut">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                      stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                  </svg>
-                  <div class="text">Log out</div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75">
+                  </path>
+                </svg>
+                <div class="text">Log out</div>
               </button>
-          </li>
+            </li>
           </ul>
         </div>
       </div>
@@ -66,7 +66,7 @@
       <h1 class=" text-light text-center p-2">Welcome to your account</h1>
     </header>
 
-    <main class=" my-5 d-flex flex-column align-items-center ">
+    <main class=" my-5 d-flex flex-column align-items-center">
       <div class="d-flex justify-content-evenly align-items-center flex-wrap col-12 gap-3">
         <div class="d-flex flex-wrap">
           <div class="card-container">
@@ -80,9 +80,11 @@
               </div>
             </div>
           </div>
-
         </div>
+        <button class="deactivateCard btn btn-danger rounded-4 mt-2" @click.prevent="deleteAccount(account.number)"> Delete
+          Account</button>
 
+       
         <div class=" table-responsive mt-2 d-flex flex-column justify-content-center align-items-center mx-2">
           <table class="table table-bordered table-striped border border-danger ">
             <caption>Transaction Resume</caption>
@@ -111,7 +113,7 @@
                 <td>No show Data</td>
                 <td>No show Data</td>
                 <td>No show Data</td>
-              </tr>           
+              </tr>
             </tbody>
           </table>
         </div>
@@ -149,6 +151,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

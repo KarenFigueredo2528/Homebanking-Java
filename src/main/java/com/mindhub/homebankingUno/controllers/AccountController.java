@@ -46,16 +46,20 @@ public class AccountController {
 	}
 
 	@PostMapping("/api/clients/current/accounts")
-	public ResponseEntity<Object> newAccount(Authentication authentication) {
+	public ResponseEntity<Object> newAccount(Authentication authentication, @RequestParam String type) {
 		Client authClient = clientService.findByEmail(authentication.getName());
-
-		if (authClient.getAccounts().size() < 3) {
+		List<Account> accountList = repoAccount.findByClientAndAccountStatusIsTrue(authClient);
+		if (accountList.size() < 3) {
 			int numRandom = NumerosAleatorios.getRandomNumber(100000, 10000000);
-			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0, true);
+			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0, true,  type);
 			authClient.addAccounts(newAccount);
 			accountService.saveAccount(newAccount);
 		} else {
 			return new ResponseEntity<>("You have reached the maximum number of accounts", HttpStatus.FORBIDDEN);
+		}
+
+		if(type.isBlank()){
+
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -66,7 +70,7 @@ public class AccountController {
 	}
 
 	@PatchMapping("/api/clients/current/accounts")
-	public ResponseEntity<Object>accountStatus(String numberAccount, Authentication authentication){
+	public ResponseEntity<Object> accountStatus (@RequestParam String numberAccount, Authentication authentication){
 		Client client = clientService.findByEmail(authentication.getName());
 
 		if(numberAccount.isBlank()){
@@ -86,6 +90,18 @@ public class AccountController {
 		if(account.getAccountStatus()==false){
 			return new ResponseEntity<>("You already delete the account", HttpStatus.FORBIDDEN);
 		}
+
+		/*Si la cuenta tiene dinero, no puede ser eliminada*/
+		if(account.getBalance() > 0 ){
+			return new ResponseEntity<>("You have money in your account" , HttpStatus.FORBIDDEN);
+		}
+		/*Validar que minimo se tenga una cuenta*/
+
+		if(client.getAccounts().isEmpty()){
+			return new ResponseEntity<>("You can not delete this account, at least you should have one account", HttpStatus.FORBIDDEN);
+		}
+
+
 
 		account.setAccountStatus(false);
 		accountService.saveAccount(account);
