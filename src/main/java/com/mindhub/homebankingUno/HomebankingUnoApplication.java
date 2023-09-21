@@ -28,7 +28,7 @@ public class HomebankingUnoApplication {
         SpringApplication.run(HomebankingUnoApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
                                       TransactionRepository transactionRepository, LoanRepository loanRepository,
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
@@ -40,9 +40,9 @@ public class HomebankingUnoApplication {
             Account account1 = new Account("VIN001", this.currentDate, 5000,true, TypeAccount.CHECKINGACCOUNT);
             Account account2 = new Account("VIN002", this.tomorrowDate, 7500,true, TypeAccount.SAVINGACCOUNT);
 
-            /*Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT, account1.getBalance() + 2500);
+            *//*Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT, account1.getBalance() + 2500);
             Transaction transfer2 = new Transaction(-500, "Keyboard", this.dataTransfer, TransactionType.DEBIT, account1.getBalance() - 500);
-            Transaction transfer3 = new Transaction(-3000, "Concert and parties", this.dataTransfer, TransactionType.CREDIT, account2.getBalance() + 3000);*/
+            Transaction transfer3 = new Transaction(-3000, "Concert and parties", this.dataTransfer, TransactionType.CREDIT, account2.getBalance() + 3000);*//*
 
             Loan mortgage = new Loan("Mortgage", 500000, Arrays.asList(12, 24, 36, 48, 60), 5);
             Loan personal = new Loan("Personal", 100000, Arrays.asList(6, 12, 24),10);
@@ -59,9 +59,9 @@ public class HomebankingUnoApplication {
             client.addAccounts(account1);
             client.addAccounts(account2);
 
-            /*account1.addTransfer(transfer1);
+            *//*account1.addTransfer(transfer1);
             account1.addTransfer(transfer2);
-            account2.addTransfer(transfer3);*/
+            account2.addTransfer(transfer3);*//*
 
             client.addLoan(mortgage1);
             client.addLoan(personal1);
@@ -79,9 +79,9 @@ public class HomebankingUnoApplication {
             accountRepository.save(account1);
             accountRepository.save(account2);
 
-            /*transactionRepository.save(transfer1);
+            *//*transactionRepository.save(transfer1);
             transactionRepository.save(transfer2);
-            transactionRepository.save(transfer3);*/
+            transactionRepository.save(transfer3);*//*
 
             loanRepository.save(mortgage);
             loanRepository.save(personal);
@@ -95,7 +95,7 @@ public class HomebankingUnoApplication {
             cardRepository.save(silver);
 
         };
-    }
+    }*/
 }
 
 
