@@ -4,6 +4,7 @@ import com.mindhub.homebankingUno.dtos.ClientDTO;
 import com.mindhub.homebankingUno.models.Account;
 import com.mindhub.homebankingUno.models.Client;
 import com.mindhub.homebankingUno.models.NumerosAleatorios;
+import com.mindhub.homebankingUno.models.TypeAccount;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
 import com.mindhub.homebankingUno.services.ClientService;
@@ -58,7 +59,7 @@ public class ClientController {
         Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientService.saveClient(client);
         int numberAccount = NumerosAleatorios.getRandomNumber(100000, 10000000);
-        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(), 0, true, type);
+        Account newAccount = new Account("VIN-" + numberAccount, LocalDate.now(), 0, true, TypeAccount.valueOf(type));
         client.addAccounts(newAccount);
         accountRepository.save(newAccount);
 
