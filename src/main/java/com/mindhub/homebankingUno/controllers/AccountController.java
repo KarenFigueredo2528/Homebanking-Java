@@ -4,6 +4,7 @@ import com.mindhub.homebankingUno.dtos.AccountDTO;
 import com.mindhub.homebankingUno.models.Account;
 import com.mindhub.homebankingUno.models.Client;
 import com.mindhub.homebankingUno.models.NumerosAleatorios;
+import com.mindhub.homebankingUno.models.TypeAccount;
 import com.mindhub.homebankingUno.repositories.AccountRepository;
 import com.mindhub.homebankingUno.repositories.ClientRepository;
 import com.mindhub.homebankingUno.services.AccountService;
@@ -51,7 +52,7 @@ public class AccountController {
 		List<Account> accountList = repoAccount.findByClientAndAccountStatusIsTrue(authClient);
 		if (accountList.size() < 3) {
 			int numRandom = NumerosAleatorios.getRandomNumber(100000, 10000000);
-			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0, true,  type);
+			Account newAccount = new Account("VIN-" + numRandom, LocalDate.now(), 0, true, TypeAccount.valueOf(type));
 			authClient.addAccounts(newAccount);
 			accountService.saveAccount(newAccount);
 		} else {

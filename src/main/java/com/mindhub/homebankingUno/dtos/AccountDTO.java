@@ -2,6 +2,7 @@ package com.mindhub.homebankingUno.dtos;
 
 import com.mindhub.homebankingUno.models.Account;
 import com.mindhub.homebankingUno.models.Transaction;
+import com.mindhub.homebankingUno.models.TypeAccount;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class AccountDTO {
     private double balance;
     private Set<TransactionDTO> transactions = new HashSet<>();
     private Boolean accountStatus;
-    private String typeAccount;
+    private TypeAccount typeAccount;
 
     public AccountDTO() {
     }
@@ -58,7 +59,7 @@ public class AccountDTO {
         return accountStatus;
     }
 
-    public String getTypeAccount() {
+    public TypeAccount getTypeAccount() {
         return typeAccount;
     }
 }

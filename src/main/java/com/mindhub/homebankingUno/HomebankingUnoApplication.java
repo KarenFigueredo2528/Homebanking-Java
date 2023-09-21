@@ -37,8 +37,8 @@ public class HomebankingUnoApplication {
             Client client = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("123456"));
             Client client2 = new Client("admin", "admin", "admin@admin.com", passwordEncoder.encode("456789"));
 
-            Account account1 = new Account("VIN001", this.currentDate, 5000,true,"Checking account");
-            Account account2 = new Account("VIN002", this.tomorrowDate, 7500,true,"Savings account");
+            Account account1 = new Account("VIN001", this.currentDate, 5000,true, TypeAccount.CHECKINGACCOUNT);
+            Account account2 = new Account("VIN002", this.tomorrowDate, 7500,true, TypeAccount.SAVINGACCOUNT);
 
             /*Transaction transfer1 = new Transaction(2500, "Buy christmas gifts", this.dataTransfer, TransactionType.CREDIT, account1.getBalance() + 2500);
             Transaction transfer2 = new Transaction(-500, "Keyboard", this.dataTransfer, TransactionType.DEBIT, account1.getBalance() - 500);
