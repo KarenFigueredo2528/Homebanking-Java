@@ -16,7 +16,7 @@ const options = {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current", { headers: { 'accept': 'application/json' } })
+        .get("/api/clients/current", { headers: { 'accept': 'application/json' } })
         .then((answer) => {
           this.clients = answer.data;
           console.log(answer);
@@ -46,7 +46,7 @@ const options = {
         buttonColor: '#3085d6',
         preConfirm: login => {
           console.log(this.type);
-          return axios.post('http://localhost:8080/api/clients/current/accounts' , `typeAccount=${this.type}`)
+          return axios.post('/api/clients/current/accounts' , `typeAccount=${this.type}`)
             .then(answer => {
               location.reload()
               location.href = "./accounts.html"

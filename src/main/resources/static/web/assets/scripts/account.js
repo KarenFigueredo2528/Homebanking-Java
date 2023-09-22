@@ -15,7 +15,7 @@ const options ={
             let parametro = location.search
             let params = new URLSearchParams(parametro)
             let idSearch = params.get("id")
-            axios.get(`http://localhost:8080/api/accounts/${idSearch}`)
+            axios.get(`/api/accounts/${idSearch}`)
             .then(answer =>{
                 this.account = answer.data
                 console.log(this.account);
@@ -34,7 +34,7 @@ const options ={
                 showLoaderOnConfirm: true,
                 buttonColor: '#3085d6',
                 preConfirm: login => {
-                    return axios.patch("http://localhost:8080/api/clients/current/accounts", `numberAccount=${number}`)
+                    return axios.patch("/api/clients/current/accounts", `numberAccount=${number}`)
                         .then(answer => {
                             location.reload()
                             location.href = "./accounts.html"

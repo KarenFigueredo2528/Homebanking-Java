@@ -28,7 +28,7 @@ public class HomebankingUnoApplication {
         SpringApplication.run(HomebankingUnoApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository,
                                       TransactionRepository transactionRepository, LoanRepository loanRepository,
                                       ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
@@ -71,10 +71,6 @@ public class HomebankingUnoApplication {
             accountRepository.save(account1);
             accountRepository.save(account2);
 
-            /*transactionRepository.save(transfer1);
-            transactionRepository.save(transfer2);
-            transactionRepository.save(transfer3);*/
-
             loanRepository.save(mortgage);
             loanRepository.save(personal);
             loanRepository.save(automotive);
@@ -87,7 +83,7 @@ public class HomebankingUnoApplication {
             cardRepository.save(silver);
 
         };
-    }
+    }*/
 }
 
 

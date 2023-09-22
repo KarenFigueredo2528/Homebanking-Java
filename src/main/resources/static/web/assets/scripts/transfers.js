@@ -25,7 +25,7 @@ const options = {
       this.form2 = true;
     },
     loadData() {
-      axios.get("http://localhost:8080/api/clients/current/accounts")
+      axios.get("/api/clients/current/accounts")
         .then((answer) => {
           const account = answer.data
           this.accounts = account.filter(account => account.accountStatus == true);
@@ -43,7 +43,7 @@ const options = {
         showLoaderOnConfirm: true,
         buttonColor: '#3085d6',
         preConfirm: login => {
-          return axios.post("http://localhost:8080/api/transactions", `amount=${this.amount}&description=${this.description}&originAccount=${this.originAccount}&finalAccount=${this.destinationAccount}`)
+          return axios.post("/api/transactions", `amount=${this.amount}&description=${this.description}&originAccount=${this.originAccount}&finalAccount=${this.destinationAccount}`)
             .then(answer => {
               alert("Transfer Succesful")
               location.reload()

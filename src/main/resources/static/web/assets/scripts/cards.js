@@ -18,7 +18,7 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get(`http://localhost:8080/api/clients/current`)
+            axios.get(`/api/clients/current`)
                 .then(answer => {
                     console.log(this.dateName);
                     const card = answer.data.cards
@@ -49,7 +49,7 @@ const options = {
                 showLoaderOnConfirm: true,
                 buttonColor: '#3085d6',
                 preConfirm: login => {
-                    return axios.patch("http://localhost:8080/api/clients/current/cards", `cardNumber=${number}`)
+                    return axios.patch("/api/clients/current/cards", `cardNumber=${number}`)
                         .then(answer => {
                             location.reload()
                         }).catch(error => {

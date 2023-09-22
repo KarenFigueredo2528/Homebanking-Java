@@ -10,10 +10,10 @@ const options = {
       lastName: "",
       email: "",
       json: "",
-      typeLoan:"",
-      maxAmount:0,
-      payments:[],
-      percentage:0
+      typeLoan: "",
+      maxAmount: 0,
+      payments: [],
+      percentage: 0
     };
   },
   created() {
@@ -22,7 +22,7 @@ const options = {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients")
+        .get("/api/clients")
         .then((answer) => {
           this.clients = answer.data;
           this.json = JSON.stringify(answer.data, null, 1);
@@ -37,32 +37,32 @@ const options = {
       };
       Swal.fire({
         title: "Do you want to add a new client?",
-        inputAttributes:{
-            autocapitalize: 'off'
+        inputAttributes: {
+          autocapitalize: 'off'
         },
         showCancelButton: true,
         confirmButtonText: 'Add client',
         showLoaderOnConfirm: true,
         buttonColor: '#3085d6',
-      
-        preConfirm: login =>{
-            return  axios
-            .post("http://localhost:8080/api/clients", newClient)
+
+        preConfirm: login => {
+          return axios
+            .post("/api/clients", newClient)
             .then((answer) => {
-                (this.firstName = ""),
-                    (this.lastName = ""),
-                    (this.email = ""),
-                    this.loadData();
+              (this.firstName = ""),
+                (this.lastName = ""),
+                (this.email = ""),
+                this.loadData();
             })
             .catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    text:error.response.data,
-                    confirmButtonColor: '#3085d6'
-                });
+              Swal.fire({
+                icon: 'error',
+                text: error.response.data,
+                confirmButtonColor: '#3085d6'
+              });
             });
         }
-      }) 
+      })
     },
     voidInput() {
       if (this.firstName && this.lastName && this.email) {
@@ -79,21 +79,39 @@ const options = {
         })
         .catch((error) => console.log(error.message));
     },
-    typeLoanCreate(){
+    typeLoanCreate() {
       const createTypeLoan = {
         name: this.typeLoan,
-        maxAmount : this.maxAmount,
+        maxAmount: this.maxAmount,
         payments: this.payments,
         percentage: this.percentage
       }
-      console.log(createTypeLoan);
-      axios.post("/api/loans/create", createTypeLoan)
-      .then(answer => {
-        location.reload()
-      }).catch(error => {
-        console.log(error);
-      })
 
+      Swal.fire({
+        title: 'Add a new loan?',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        buttonColor: '#3085d6',
+        preConfirm: login => {
+          return axios.post("/api/loans/create", createTypeLoan)
+            .then(answer => {
+              location.reload()
+              alert("The new type loan was created ")
+            }).catch(error => {
+              Swal.fire({
+                icon: 'error',
+                text: error.response.data,
+                confirmButtonColor: '#3085d6'
+
+              });
+            })
+        },
+        alloweOutside: () => !Swal.isLoading()
+      })
     }
   },
 };
@@ -108,7 +126,7 @@ const body = document.querySelector("body");
 const form = document.querySelector("form");
 const button = document.querySelector(".button-add");
 switchButton.addEventListener("click", e => {
-  body.classList.toggle("dark-mode"); 
+  body.classList.toggle("dark-mode");
   form.classList.toggle("dark-form");
   button.classList.toggle("dark-button");
 });

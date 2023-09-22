@@ -20,7 +20,7 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/api/clients/current/accounts")
+            axios.get("/api/clients/current/accounts")
                 .then(answer => {
                     this.accounts = answer.data
                     console.log(this.accounts);
@@ -29,7 +29,7 @@ const options = {
                 })
         },
         loadDataLoans() {
-            axios.get("http://localhost:8080/api/loans")
+            axios.get("/api/loans")
                 .then(answer => {
                     this.loans = answer.data
                     console.log(this.loans);
@@ -63,9 +63,10 @@ const options = {
                 showLoaderOnConfirm: true,
                 buttonColor: '#3085d6',
                 preConfirm: login => {
-                    return axios.post("http://localhost:8080/api/loans", loanDetails)
+                    return axios.post("/api/loans", loanDetails)
                         .then(answer => {
                             location.reload()
+                            alert("The loan was success")
                         }).catch(error => {
                             Swal.fire({
                                 icon: 'error',
