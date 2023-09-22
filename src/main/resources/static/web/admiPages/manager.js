@@ -11,7 +11,9 @@ const options = {
       email: "",
       json: "",
       typeLoan:"",
-      maxAmount:0
+      maxAmount:0,
+      payments:[],
+      percentage:0
     };
   },
   created() {
@@ -77,6 +79,22 @@ const options = {
         })
         .catch((error) => console.log(error.message));
     },
+    typeLoanCreate(){
+      const createTypeLoan = {
+        name: this.typeLoan,
+        maxAmount : this.maxAmount,
+        payments: this.payments,
+        percentage: this.percentage
+      }
+      console.log(createTypeLoan);
+      axios.post("/api/loans/create", createTypeLoan)
+      .then(answer => {
+        location.reload()
+      }).catch(error => {
+        console.log(error);
+      })
+
+    }
   },
 };
 
