@@ -82,18 +82,26 @@
                 <h2>Details</h2>
                 <h5>Balance: {{account.balance.toLocaleString(1)}}</h5>
                 <h5>Creation Date: {{account.creationDate}}</h5>
+                <h5>{{account.typeAccount}}</h5>
               </div>
             </div>
             <a :href="'./account.html?id='+account.id" class="btn text-center mt-2 text-light"
               id="btn-transaction">Transaction History</a>
-           
+
           </div>
         </template>
-        <template v-if="accounts.length < 3">
-          <button class="createAccount" @click="createAccount">
-            Create new account
-          </button>
-        </template>
+        <div class="d-flex flex-column">
+          <template v-if="accounts.length < 3">
+            <button class="createAccount" @click="createAccount">
+              Create new account
+            </button>
+            <div class="d-flex gap-2 bg-warning px-4 py-2 rounded-4 mt-2">
+              <label class="d-flex gap-1"><input type="radio" name="Savings" id="Savings" value="SAVINGACCOUNT" v-model="type">Savings</label>
+              <label class="d-flex gap-1"><input type="radio" name="Savings" id="Savings"
+                  value="CHECKINGACCOUNT" v-model="type">Checking</label>
+            </div>
+          </template>
+        </div>
       </div>
 
       <div class="mt-4 container">

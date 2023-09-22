@@ -123,5 +123,33 @@ public class LoansController {
 		return new ResponseEntity<>("The loan was created",HttpStatus.ACCEPTED);
 	}
 
+	@PostMapping("/loans/create")
+	public ResponseEntity<Object> typeLoan(@RequestBody LoanDTO loanDTO, Authentication authentication){
+		Client client = clientService.findByEmail(authentication.getName());
 
+		if(loanDTO.getName().isBlank()){
+			return new ResponseEntity<>("Please enter the new type of loan",HttpStatus.FORBIDDEN);
+		}
+
+		if(loanDTO.getMaxAmount() < 10000){
+			return new ResponseEntity<>("The amount does not reach the minimum to create a new type of loan",HttpStatus.FORBIDDEN);
+		}
+
+		if(loanDTO.getPayments().isEmpty()){
+			return new ResponseEntity<>("You did not assign a number of payments for the loan",HttpStatus.FORBIDDEN);
+		}
+
+		if(loanDTO.getPercentage() <= 0){
+			return new ResponseEntity<>("You did not assign a valid percentage for the loan",HttpStatus.FORBIDDEN);
+		}
+
+		if(loanRepository.existsByName(loanDTO.getName())){
+			return new ResponseEntity<>("This type is already exist",HttpStatus.FORBIDDEN);
+		}
+
+		Loan newTypeLoan = new Loan(loanDTO.getName(), loanDTO.getMaxAmount(), loanDTO.getPayments(), loanDTO.getPercentage());
+		loanRepository.save(newTypeLoan);
+
+		return new ResponseEntity<>("The type was created", HttpStatus.CREATED);
+	}
 }

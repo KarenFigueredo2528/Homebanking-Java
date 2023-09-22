@@ -6,7 +6,8 @@ const options = {
       clients: [],
       accounts: [],
       loans: [],
-      numberAccount: ""
+      numberAccount: "",
+      type:""
     };
   },
   created() {
@@ -44,11 +45,13 @@ const options = {
         showLoaderOnConfirm: true,
         buttonColor: '#3085d6',
         preConfirm: login => {
-          return axios.post("http://localhost:8080/api/clients/current/accounts")
+          console.log(this.type);
+          return axios.post('http://localhost:8080/api/clients/current/accounts' , `typeAccount=${this.type}`)
             .then(answer => {
               location.reload()
               location.href = "./accounts.html"
             }).catch(error => {
+              console.log(error.response);
               Swal.fire({
                 icon: 'error',
                 text: error.response.data,

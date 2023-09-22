@@ -12,6 +12,7 @@ header {
 
 main {
   padding: 2rem;
+  min-height: 70vh;
 }
 
 /*Form style*/
@@ -86,16 +87,6 @@ form.dark-form {
     background-color: #102b3f;
 }
 
-/* .button-add.dark-button{
-    background-color: darkkhaki;
-    color: #102b3f;
-}
-
-.button-add.dark-button:hover{
-    background-color: #102b3f;
-    color: white;
-} */
-
 #bg-dark{
     background-color: #102b3f;
     color: white;
@@ -106,3 +97,6 @@ form.dark-form {
     color: white;
 }
 
+a{
+  text-decoration: none;
+}

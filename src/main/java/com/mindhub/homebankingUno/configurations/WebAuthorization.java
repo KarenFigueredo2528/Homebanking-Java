@@ -17,44 +17,45 @@ import javax.servlet.http.HttpSession;
 @Configuration
 public class WebAuthorization {
 
-  @Bean
-  protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http.authorizeRequests()
-          .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
-          .antMatchers("/web/index.html", "/web/register.html", "/web/index.js", "/web/style/**", "/web/images/**").permitAll()
-          .antMatchers("/web/admiPages/**", "/web/style/style.css", "/api/clients" ,"/rest").hasAuthority("ADMIN")
-          .antMatchers("/web/assets/**").hasAuthority("CLIENT")
-          .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
-          .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts/{id}", "/api/accounts", "/api/loans", "/api/clients/current/accounts" ).hasAuthority("CLIENT")
-          .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards" ,"/api/clients/current/accounts").hasAuthority("CLIENT")
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
+                .antMatchers("/web/index.html", "/web/register.html", "/web/index.js", "/web/style/**", "/web/images/**").permitAll()
+                .antMatchers("/web/admiPages/**", "/web/style/style.css", "/api/clients", "/rest").hasAuthority("ADMIN")
+                .antMatchers("/web/assets/**").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/api/clients/current/**", "/api/accounts/{id}", "/api/accounts", "/api/loans", "/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards", "/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/loans/create").hasAuthority("ADMIN")
 
-          //Para que cualquier peticion que no este asignada sea dengada.
-          .anyRequest().denyAll();
+                //Para que cualquier peticion que no este asignada sea dengada.
+                .anyRequest().denyAll();
 
-    http.formLogin()
-          .usernameParameter("email")
-          .passwordParameter("password")
-          .loginPage("/api/login");
-    http.logout().logoutUrl("/api/logout");
+        http.formLogin()
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .loginPage("/api/login");
+        http.logout().logoutUrl("/api/logout");
 
-    http.csrf().disable();
-    http.headers().frameOptions().disable();
-    http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-    http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
-    http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-    http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
+        http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
-    return http.build();
-  }
-
-  private void clearAuthenticationAttributes(HttpServletRequest request) {
-
-    HttpSession session = request.getSession(false);
-
-    if (session != null) {
-      session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
+        return http.build();
     }
-  }
+
+    private void clearAuthenticationAttributes(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+        }
+    }
 }

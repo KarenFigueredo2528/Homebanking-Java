@@ -12,6 +12,9 @@ public class LoanDTO {
 	private List<Integer> payments;
 	private double percentage;
 
+	public LoanDTO() {
+	}
+
 	public LoanDTO(Loan loan) {
 		this.id = loan.getId();
 		this.name = loan.getName();

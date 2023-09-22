@@ -10,6 +10,8 @@ const options = {
       lastName: "",
       email: "",
       json: "",
+      typeLoan:"",
+      maxAmount:0
     };
   },
   created() {
