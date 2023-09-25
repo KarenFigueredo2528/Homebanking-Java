@@ -25,12 +25,11 @@ const options = {
           window.alert("Ups! Something is wrong with de data, try again");
         });
     },
+
     register(event) {
       event.preventDefault();
       console.log("si funciona... por lo menos entra");
-      axios.post("/api/clients",`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
-          { headers: { "content-type": "application/x-www-form-urlencoded" } }
-        )
+      axios.post("/api/clients",`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`)
         .then((response) => {
           this.login();
         })

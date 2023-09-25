@@ -25,9 +25,9 @@ const options = {
       this.form2 = true;
     },
     loadData() {
-      axios.get("/api/clients/current/accounts")
+      axios.get("/api/clients/current")
         .then((answer) => {
-          const account = answer.data
+          let account = answer.data.accounts
           this.accounts = account.filter(account => account.accountStatus == true);
           console.log(this.accounts);
         });
@@ -59,6 +59,13 @@ const options = {
         alloweOutside: () => !Swal.isLoading()
       })
     },
+    logOut() {
+            axios.post("/api/logout")
+                .then(response => {
+                    location.href = "../../index.html"
+                })
+                .catch(error => console.log(error.message))
+        },
   },
 };
 

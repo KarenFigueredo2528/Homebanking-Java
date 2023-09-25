@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -72,6 +74,7 @@ public class AccountController {
     @PatchMapping("/api/clients/current/accounts")
     public ResponseEntity<Object> accountStatus(@RequestParam String numberAccount, Authentication authentication) {
         Client client = clientService.findByEmail(authentication.getName());
+        Set<Account> accountSet = client.getAccounts().stream().filter(acc -> acc.getAccountStatus()).collect(Collectors.toSet());
 
         if (numberAccount.isBlank()) {
             return new ResponseEntity<>("Please enter number account", HttpStatus.FORBIDDEN);
@@ -79,28 +82,30 @@ public class AccountController {
 
         Account account = repoAccount.findByNumber(numberAccount);
 
+        //Si la cuenta existe en la base de datos
         if (account == null) {
             return new ResponseEntity<>("The account was not found", HttpStatus.FORBIDDEN);
         }
 
+        //Si en las cuentas del cliente no existe la cuenta
         if (!client.getAccounts().contains(account)) {
             return new ResponseEntity<>("The account does not exist", HttpStatus.FORBIDDEN);
         }
 
+        //Si el estado de la cuenta es falso
         if (account.getAccountStatus() == false) {
             return new ResponseEntity<>("You already delete the account", HttpStatus.FORBIDDEN);
         }
 
-        /*Si la cuenta tiene dinero, no puede ser eliminada*/
+        //Si la cuenta tiene dinero, no puede ser eliminada
         if (account.getBalance() > 0) {
             return new ResponseEntity<>("You have money in your account", HttpStatus.FORBIDDEN);
         }
-        /*Validar que minimo se tenga una cuenta*/
 
-        if (client.getAccounts().isEmpty()) {
+        //Validar si tiene mínimo una cuenta
+        if (accountSet.size() <=1) {
             return new ResponseEntity<>("You can not delete this account, at least you should have one account", HttpStatus.FORBIDDEN);
         }
-
 
         account.setAccountStatus(false);
         accountService.saveAccount(account);

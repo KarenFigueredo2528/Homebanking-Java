@@ -10,33 +10,33 @@ import java.util.stream.Collectors;
 
 @Entity
 public class Client {
-    //Annotations @
+    //Anotaciones
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native") //Especifíca como se generaran los valores
+    @GenericGenerator(name = "native", strategy = "native") //Especifica la estrategia de generación a utilizar
 
-    //Properties
+    //Propiedades
     private long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
-    //Relations
+    //Relaciones y propiedades
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoans = new HashSet<>();
+    private Set<ClientLoan> clientLoans = new HashSet<>(); //Nueva colección para que se guarde y no se repita
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
-    //Constructor methods
+    //Método constructor
     public Client(){
     }
 
-    //Constructor method
+    //Método constructor - sobrecarga  de métodos
     public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +44,7 @@ public class Client {
         this.password = password;
     }
 
-    //Accessor methods (getters and setters)
+    //Métodos Accesores (getters and setters)
     public long getId() {
         return id;
     }
@@ -114,16 +114,19 @@ public class Client {
                 .collect(Collectors.toList());
     }
 
+    //Método para asignar el préstamo al cliente
     public void addLoan(ClientLoan clientLoan) {
         clientLoan.setClient(this);
         this.clientLoans.add(clientLoan);
     }
 
+    //Método para asignar la cuenta al cliente
     public void addAccounts(Account account1) {
         account1.setClient(this);
         this.accounts.add(account1);
     }
 
+    //Método para asignar las tarjetas al cliente
     public void addCards(Card card){
         card.setClient(this);
         this.cards.add(card);

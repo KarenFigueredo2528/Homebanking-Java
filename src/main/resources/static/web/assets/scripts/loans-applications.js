@@ -10,7 +10,8 @@ const options = {
             accounts: [],
             filterPayments: [],
             selectedLoan: "",
-            percentage: ""
+            percentage: "",
+            loanDetails:{}
 
         }
     },
@@ -20,9 +21,9 @@ const options = {
     },
     methods: {
         loadData() {
-            axios.get("/api/clients/current/accounts")
+            axios.get("/api/clients/current", { headers: { 'accept': 'application/json' } })
                 .then(answer => {
-                    this.accounts = answer.data
+                    this.accounts = answer.data.accounts.filter(acc => acc.accountStatus)
                     console.log(this.accounts);
                 }).catch(error => {
                     console.log(error);
@@ -46,7 +47,8 @@ const options = {
             console.log(this.percentage);
         },
         sendLoan() {
-            const loanDetails = {
+            console.log("entra");
+            this.loanDetails = {
                 id: this.selectedLoan,
                 numberAccountDestination: this.originAccount,
                 amount: Number(this.amount),
@@ -63,7 +65,8 @@ const options = {
                 showLoaderOnConfirm: true,
                 buttonColor: '#3085d6',
                 preConfirm: login => {
-                    return axios.post("/api/loans", loanDetails)
+                    console.log(this.loanDetails);
+                    return axios.post("/api/loans", this.loanDetails)
                         .then(answer => {
                             location.reload()
                             alert("The loan was success")

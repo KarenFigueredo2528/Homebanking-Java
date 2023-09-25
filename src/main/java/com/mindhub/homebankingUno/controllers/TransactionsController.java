@@ -32,6 +32,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 public class TransactionsController {
@@ -68,9 +70,9 @@ public class TransactionsController {
 
 
 		Client clientAuth = clientService.findByEmail(authetication.getName());
-		/*Pueden linea 63 y 64 cambiar su accountRepository*/
 		Account accOrigin = accountRepository.findByNumber(originAccount);
 		Account accDestination = accountRepository.findByNumber(finalAccount);
+		Set<Account> accountSet = clientAuth.getAccounts().stream().filter(acc -> acc.getAccountStatus()).collect(Collectors.toSet());
 
 
 		if (amount <= 0 ){

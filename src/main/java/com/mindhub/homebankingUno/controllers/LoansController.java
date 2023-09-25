@@ -31,9 +31,6 @@ public class LoansController {
 	private AccountRepository accountRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Autowired
 	private LoanRepository loanRepository;
 
 	@Autowired
@@ -64,12 +61,32 @@ public class LoansController {
 	public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication authentication) {
 
 		Client client = clientService.findByEmail(authentication.getName());
-		Account account = accountRepository.findByNumber(loanApplicationDTO.getNumberAccountDestination());
-		Loan loan = loanRepository.findById(loanApplicationDTO.getId());
 
 		if (client == null) {
 			return new ResponseEntity<>("The client wasn't found", HttpStatus.FORBIDDEN);
 		}
+
+		if (loanApplicationDTO.getId() == 0 && loanApplicationDTO.getNumberAccountDestination() == null && loanApplicationDTO.getAmount() == 0 && loanApplicationDTO.getPayments() == 0) {
+			return new ResponseEntity<>("Ups, you did not fill the form to get a loan, try again!", HttpStatus.FORBIDDEN);
+		}
+
+		if(loanApplicationDTO.getId() == 0 ){
+			return new ResponseEntity<>("You have to choose the loan" , HttpStatus.FORBIDDEN);
+		}
+
+		if(loanApplicationDTO.getNumberAccountDestination() == null){
+			return new ResponseEntity<>("Select the destination account", HttpStatus.FORBIDDEN);
+		}
+		if(loanApplicationDTO.getAmount() <= 0){
+			return new ResponseEntity<>("The amount must be grater than 0" , HttpStatus.FORBIDDEN);
+		}
+
+		if(loanApplicationDTO.getPayments() <= 0){
+			return new ResponseEntity<>("Seems like you do not choose your payments" , HttpStatus.FORBIDDEN);
+		}
+
+		Account account = accountRepository.findByNumber(loanApplicationDTO.getNumberAccountDestination());
+		Loan loan = loanRepository.findById(loanApplicationDTO.getId());
 
 		if (loan.getPayments() == null) {
 			return new ResponseEntity<>("Payments not found", HttpStatus.FORBIDDEN);
@@ -84,7 +101,7 @@ public class LoansController {
 		}
 
 		if (loan.getMaxAmount() < loanApplicationDTO.getAmount()) {
-			return new ResponseEntity<>("You don't have enough money", HttpStatus.FORBIDDEN);
+			return new ResponseEntity<>("Ups, try with a lower loan", HttpStatus.FORBIDDEN);
 		}
 
 		if (!(loan.getPayments().contains(loanApplicationDTO.getPayments()))) {
@@ -99,11 +116,10 @@ public class LoansController {
 			return new ResponseEntity<>("This account doesn't match",HttpStatus.UNAUTHORIZED);
 		}
 
+
 		if(clientLoanService.existsByClientAndLoan(client, loan)) {
 			return new ResponseEntity<>("The client already has this loan", HttpStatus.FORBIDDEN);
 		}
-
-
 
 		ClientLoan clientLoan = new ClientLoan (loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount()*loan.getPercentage()/100), loanApplicationDTO.getPayments());
 		clientLoan.setClient(client);
